@@ -1,17 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import ReactGridLayout from 'react-grid-layout';
 import './App.css';
+//import { Root as exapleComponent } from  '@databraid/example-widget/lib';
 
-const App = () => (
-  <div className="App">
-    <div className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <h2>Welcome to React</h2>
-    </div>
-    <p className="App-intro">
-      To get started, edit <code>src/App.js</code> and save to reload.
-    </p>
-  </div>
-);
+class MyFirstGrid extends Component {
+  render() {
+    // layout is an array of objects, see the demo for more complete usage
+    var layout = [
+      {i: 'a', x: 0, y: 0, w: 4, h: 2, static: true},
+    ];
+    return (
+      <ReactGridLayout className="layout" layout={layout} cols={12} rowHeight={30} width={1200}>
+        <div key={'a'}>Put the imported component as exapleComponent here</div>
+      </ReactGridLayout>
+    )
+  }
+}
 
-export default App;
+export default MyFirstGrid
