@@ -8,17 +8,20 @@ and
 
 https://react.semantic-ui.com/
 
-See for the trello board:
+See the following trello board for developer tasks:
 
 https://trello.com/b/GlhG504F/dashboard-spa
 
 # Using the widgets inside the dashboard-spa
 
 ## creating widgets as libraries:
-- modify `src/index.js`  to export the root component, exluding the `provider` as the default export, and the root reducer as a names export labeled `rootReducer`, like this:
+- modify `src/index.js`  to export the root component, excluding the `provider`, as the default export. Also export the root reducer as a named export labeled `rootReducer`, like this:
+
+- Root shouldn't be a React Element, but rather a React Component, the dashboard will be responisble for actually rendering it.
+
 ```
 export { rootReducer };
-export default root
+export default Root
 ```
 -  create folder `libs` in root directory of widget SPA.
 
