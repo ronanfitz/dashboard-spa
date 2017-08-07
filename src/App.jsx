@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactGridLayout from 'react-grid-layout';
 import './App.css';
-//import { Root as exapleComponent } from  '@databraid/example-widget/lib';
+//import { Root as ExapleComponent } from  '@databraid/example-widget/lib';
 
 class MyFirstGrid extends Component {
   render() {
@@ -11,7 +11,7 @@ class MyFirstGrid extends Component {
     ];
     return (
       <ReactGridLayout className="layout" layout={layout} cols={12} rowHeight={30} width={1200}>
-        <div key={'a'}>Put the imported component as exapleComponent here</div>
+        <div key={'a'}> the imported component as exapleComponent here</div>
       </ReactGridLayout>
     )
   }
