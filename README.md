@@ -77,3 +77,26 @@ export default Root
 * then you use ` import DefaultExport from  '@databraid/your-widget-name/lib';` to work with the widget default export, which should be the root component (excluding the `provider`) from your widget.
 
 * use `import { rootReducer  }  from '@databraid/your-widget-name/lib` to work with the root reducer exported by your widget.
+
+
+## Widget Reducer in Dashboard SPA. 
+
+* in the dashboard SPA create the `widgets` reducer, which is to be root level reducer of the redux store. Inside this reducer, for each widget create a key value pair for its reducer, like:
+
+```
+{
+  widgets: {
+    [widgetName]: rootReducerOfTheImportedWidget
+  }
+}
+```
+
+* The `key` (in the above example `widgetName` should be passed to the root level component of each widget as the prop `widgetId`. Then each widget can look in `state.widgets[widgetId]` for the state corresponding to its widget in the redux store. This will obviously require a refactor of the widget SPAs. 
+
+* note that `widgetId` prop needs to be passed down the widget SPA component hierarchy. a component that wants to pass its own props to a child can do this like so:
+
+```
+  //inside the render function of a component
+  
+  <ChildComponent {...this.props} />
+```
