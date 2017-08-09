@@ -1,10 +1,7 @@
-import { combineReducers } from 'redux'
-//use something like this: import { rootReducer as exampleReducer }  from '@databraid/example-widget-app/lib'
-//
-// export default combineReducers({
-//   widget: widgetReducer,
-// })
+import { combineReducers } from 'redux';
+import { rootReducer as transitReducer } from '@databraid/transit-widget/lib';
 
-
+console.log(transitReducer);
 export default combineReducers({
-})
+  transit_widget: transitReducer,
+});
