@@ -15,7 +15,7 @@ https://trello.com/b/GlhG504F/dashboard-spa
 # Using the widgets inside the dashboard-spa
 
 ## creating widgets as libraries:
-- modify `src/index.js`  to export the root component, excluding the `provider`, as the default export. Also export the root reducer as a named export labeled `rootReducer`, like this:
+- modify `src/index.js`  to export the root component, excluding the `provider`, as the default export. Also export the root reducer as a named export labeled `rootReducer`.  By `rootReducer` we mean what goes in `state.widgets[widgetID]`. See the Widget Reducer in Dashboard SPA section below.
 
 - Root shouldn't be a React Element, but rather a React Component, the dashboard will be responisble for actually rendering it.
 
@@ -23,9 +23,16 @@ https://trello.com/b/GlhG504F/dashboard-spa
 export { rootReducer };
 export default Root
 ```
--  create folder `libs` in root directory of widget SPA.
+- create folder `libs` in root directory of widget SPA.
 
--  create folder `widget-libs` under the `libs` directory.
+- create folder `widget-libs` under the `libs` directory.
+
+- Modify `.gitignore` in the root folder of your app to add (since we don't want these folders to be tracked by github):
+
+```
+/libs/widget-libs/lib
+/libs/widget-libs/node_modules
+```
 
 - run `npm init` with all defaults.
 
@@ -64,11 +71,17 @@ export default Root
 
 - the `dependencies` may need to be updated if your code has any other js libary dependencies. `css` dependencies will be handled on the receiving side.
 
+- run `echo package-lock=false > .npmrc`
+
+- run `npm install`
+
 - run `npm run build` which will generate the `lib` directory.
 
 - publish your npm package, run `npm publish`.
 
 - in the future to publish changes to the lib, run `npm version`.
+
+- In each of widget SPAs, you should replicate the state shape that is present in the dashboard SPA, in order to test it properly. This means a total refactor of your app in the way that it looks for state in the redux store.
 
 ## using a widget lib on the importing side (i.e. in the dashboard-spa).
 
@@ -86,12 +99,15 @@ export default Root
 ```
 {
   widgets: {
-    [widgetName]: rootReducerOfTheImportedWidget
+    ids: [widgetName],
+    byId: {
+      [widgetName]: rootReducerOfTheImportedWidget
+    }
   }
 }
 ```
 
-* The `key` (in the above example `widgetName` should be passed to the root level component of each widget as the prop `widgetId`. Then each widget can look in `state.widgets[widgetId]` for the state corresponding to its widget in the redux store. This will obviously require a refactor of the widget SPAs. 
+* The `key` (in the above example `widgetName` should be passed to the root level component of each widget as the prop `widgetId`. Then each widget can look in `state.widgets.byId[widgetId]` for the state corresponding to its widget in the redux store. This will obviously require a refactor of the widget SPAs. 
 
 * note that `widgetId` prop needs to be passed down the widget SPA component hierarchy. a component that wants to pass its own props to a child can do this like so:
 
@@ -100,3 +116,5 @@ export default Root
   
   <ChildComponent {...this.props} />
 ```
+
+* This passings down of `widgetId` prop can be avoided if `widgetId` is placed inside the context of the root level component of the widget.
