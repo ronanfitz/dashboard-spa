@@ -1,10 +1,25 @@
-import { combineReducers } from 'redux'
-//use something like this: import { rootReducer as exampleReducer }  from '@databraid/example-widget-app/lib'
-//
-// export default combineReducers({
-//   widget: widgetReducer,
-// })
+import { combineReducers } from 'redux';
+import { rootReducer as transitReducer } from '@databraid/transit-widget/lib';
+import {
+  TRANSIT_WIDGET_ID,
+  SLACK_WIDGET_ID,
+  GITHUB_WIDGET_ID,
+} from '../constants';
 
+const initialState = {
+  ids: [TRANSIT_WIDGET_ID],
+  byId: {},
+};
 
-export default combineReducers({
-})
+const widgets = (state = initialState, action) => ({
+  ...state,
+  byId: {
+    [TRANSIT_WIDGET_ID]: transitReducer(state.byId[TRANSIT_WIDGET_ID], action),
+  },
+});
+
+const rootReducer = combineReducers({
+  widgets,
+});
+
+export default rootReducer;
