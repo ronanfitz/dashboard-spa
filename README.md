@@ -15,12 +15,14 @@ https://trello.com/b/GlhG504F/dashboard-spa
 # Using the widgets inside the dashboard-spa
 
 ## creating widgets as libraries:
-- modify `src/index.js`  to export the root component, excluding the `provider`, as the default export. Also export the root reducer as a named export labeled `rootReducer`.  By `rootReducer` we mean what goes in `state.widgets[widgetID]`. See the Widget Reducer in Dashboard SPA section below.
+- modify `src/index.js`  to export the root component, excluding the `provider`, as the default export. Also export the root reducer as a named export labeled `rootReducer`.  By `rootReducer` we mean what goes in `state.widgets[widgetID]`. See the Widget Reducer in Dashboard SPA section below. 
+
+- Also `src/index.js` should export the `api` that it uses inside thunks, as `WIDGETNAME_API`. The code for the widget should also be updated to use this new named object, i.e. instead of using `api`, it should use `WIDGETNAME_API`.
 
 - Root shouldn't be a React Element, but rather a React Component, the dashboard will be responisble for actually rendering it.
 
 ```
-export { rootReducer };
+export { rootReducer, TRANSIT_API };
 export default Root
 ```
 - create folder `libs` in root directory of widget SPA.
