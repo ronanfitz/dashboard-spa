@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactGridLayout from 'react-grid-layout';
 import TransitComponent from '@databraid/transit-widget/lib';
+import SlackComponent from '@databraid/slack-widget/lib';
 import {
   TRANSIT_WIDGET_ID,
   SLACK_WIDGET_ID,
@@ -31,7 +32,7 @@ const App = () => {
       </div>
 
       <div key={'b'}>GitHub</div>
-      <div key={'c'}>Slack</div>
+      <div key={'c'}><SlackComponent widgetId={SLACK_WIDGET_ID} /></div>
     </Grid>
   );
 };
