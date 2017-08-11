@@ -2,6 +2,7 @@ import React from 'react';
 import ReactGridLayout from 'react-grid-layout';
 import TransitComponent from '@databraid/transit-widget/lib';
 import SlackComponent from '@databraid/slack-widget/lib';
+import GithubComponent from '@databraid/github-widget/lib';
 import { TRANSIT_WIDGET_ID, SLACK_WIDGET_ID, GITHUB_WIDGET_ID } from './constants';
 import './App.css';
 // import { Root as ExapleComponent } from  '@databraid/example-widget/lib';
@@ -28,7 +29,10 @@ const App = () => {
         <TransitComponent widgetId={TRANSIT_WIDGET_ID} />
       </div>
 
-      <div key={'b'}>GitHub</div>
+      <div key={'b'}>
+        <GithubComponent widgetId={GITHUB_WIDGET_ID} />
+      </div>
+
       <div key={'c'}>
         <SlackComponent widgetId={SLACK_WIDGET_ID} />
       </div>
