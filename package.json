@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@databraid/slack-widget": "1.0.3",
-    "@databraid/transit-widget": "1.0.14",
+    "@databraid/transit-widget": "^1.0.15",
     "react": "15.6.1",
     "react-dom": "15.6.1",
     "react-grid-layout": "0.14.7",
