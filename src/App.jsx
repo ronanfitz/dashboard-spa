@@ -15,7 +15,7 @@ const App = () => {
       i: 'a',
       x: 6,
       y: 0,
-      w: 6,
+      w: 12,
       h: 10,
       minH: 6.5,
       minW: 7,
