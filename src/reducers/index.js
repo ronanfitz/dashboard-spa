@@ -12,7 +12,7 @@ const widgets = (state = initialState, action) => ({
   ...state,
   byId: {
     [TRANSIT_WIDGET_ID]: transitReducer(state.byId[TRANSIT_WIDGET_ID], action),
-    [GITHUB_API]: githubReducer(state.byId[GITHUB_API], action),
+    [GITHUB_WIDGET_ID]: githubReducer(state.byId[GITHUB_WIDGET_ID], action),
   },
 });
 
