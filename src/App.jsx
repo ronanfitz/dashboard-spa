@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux';
 import ReactGridLayout from 'react-grid-layout';
 import { Button, Icon, Sidebar } from 'semantic-ui-react'
 import TransitComponent from '@databraid/transit-widget/lib';
@@ -8,7 +8,13 @@ import SlackComponent from '@databraid/slack-widget/lib';
 import GithubComponent from '@databraid/github-widget/lib';
 import { TRANSIT_WIDGET_ID, SLACK_WIDGET_ID, GITHUB_WIDGET_ID } from './constants';
 import './App.css';
+import { showAddWidgetModal } from './actions';
+import ModalAddWidget from './components/ModalAddWidget';
+
 const Grid = ReactGridLayout.WidthProvider(ReactGridLayout);
+
+
+
 
 const App = (props) => {
   // layout is an array of objects, see the demo for more complete usage
@@ -45,7 +51,8 @@ const App = (props) => {
 
   return (
     <div className='container'>
-      <Button primary fluid><Icon name='add circle' />Add widget</Button>
+      <ModalAddWidget />
+      <Button primary fluid onClick={props.showAddWidgetModal}><Icon name='add circle' />Add widget</Button>
       <Grid verticalCompact={false} autclassName="layout" layout={layout} cols={12} rowHeight={30}>
         {components}
       </Grid>
@@ -61,7 +68,13 @@ const mapStateToProps = (state, ownProps) => {
   return { ids, byId };
 };
 
+export const mapDispatchToProps = dispatch => bindActionCreators({
+  showAddWidgetModal,
+},
+dispatch);
+
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(App);
