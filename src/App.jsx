@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 import ReactGridLayout from 'react-grid-layout';
+import { Button, Icon, Sidebar } from 'semantic-ui-react'
 import TransitComponent from '@databraid/transit-widget/lib';
 import SlackComponent from '@databraid/slack-widget/lib';
 import GithubComponent from '@databraid/github-widget/lib';
@@ -17,25 +18,25 @@ const App = (props) => {
     { i: SLACK_WIDGET_ID, x: 0, y: 0, w: 6, h: 10 },
   ];
 
-  var components = props.ids.map((component, i) => {
+  var components = props.ids.map((component) => {
     if(component === TRANSIT_WIDGET_ID){
       return (
-        <div key={TRANSIT_WIDGET_ID}>
-          <TransitComponent widgetId={TRANSIT_WIDGET_ID} />
+        <div key={component}>
+          <TransitComponent widgetId={component} />
         </div>
       )
     }
     if(component === GITHUB_WIDGET_ID){
       return (
-        <div key={GITHUB_WIDGET_ID}>
-          <GithubComponent widgetId={GITHUB_WIDGET_ID} />
+        <div key={component}>
+          <GithubComponent widgetId={component} />
         </div>
       )
     }
     if(component === SLACK_WIDGET_ID){
       return (
-        <div key={SLACK_WIDGET_ID}>
-          <SlackComponent widgetId={SLACK_WIDGET_ID} />
+        <div key={component}>
+          <SlackComponent widgetId={component} />
         </div>
       )
     }
@@ -43,30 +44,21 @@ const App = (props) => {
   });
 
   return (
-    <Grid verticalCompact={false} autclassName="layout" layout={layout} cols={12} rowHeight={30}>
-      {components}
-    </Grid>
+    <div className='container'>
+      <Button primary fluid><Icon name='add circle' />Add widget</Button>
+      <Grid verticalCompact={false} autclassName="layout" layout={layout} cols={12} rowHeight={30}>
+        {components}
+      </Grid>
+    </div>
   );
 };
 
 
-// <div key={TRANSIT_WIDGET_ID}>
-//   <TransitComponent widgetId={TRANSIT_WIDGET_ID} />
-// </div>
-//
-// <div key={GITHUB_WIDGET_ID}>
-//   <GithubComponent widgetId={GITHUB_WIDGET_ID} />
-// </div>
-//
-// <div key={SLACK_WIDGET_ID}>
-//   <SlackComponent widgetId={SLACK_WIDGET_ID} />
-// </div>
-
 const mapStateToProps = (state, ownProps) => {
   const ids  = state.widgets.ids;
-  const byIds  = state.widgets.byIds;
+  const byId  = state.widgets.byId;
 
-  return { ids, byIds };
+  return { ids, byId };
 };
 
 
