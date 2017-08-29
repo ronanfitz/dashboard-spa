@@ -6,7 +6,7 @@ import { rootReducer as githubReducer } from '@databraid/github-widget/lib';
 import { TRANSIT_WIDGET_ID, SLACK_WIDGET_ID, GITHUB_WIDGET_ID } from '../constants';
 
 const initialState = {
-  ids: [TRANSIT_WIDGET_ID, GITHUB_WIDGET_ID],
+  ids: [TRANSIT_WIDGET_ID, GITHUB_WIDGET_ID, SLACK_WIDGET_ID],
   byId: {},
 };
 
