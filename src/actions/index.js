@@ -3,7 +3,8 @@ import {
   SLACK_WIDGET_ID,
   GITHUB_WIDGET_ID,
   ADD_WIDGET,
-  SHOW_ADD_WIDGET_MODAL
+  SHOW_ADD_WIDGET_MODAL,
+  HIDE_ADD_WIDGET_MODAL,
 } from '../constants';
 
 export function addTransitWidget(){
@@ -20,4 +21,8 @@ export function addSlackWidget(){
 
 export function showAddWidgetModal(){
   return {type: SHOW_ADD_WIDGET_MODAL}
+}
+
+export function hideAddWidgetModal(){
+  return {type: HIDE_ADD_WIDGET_MODAL}
 }

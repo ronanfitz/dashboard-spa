@@ -17,12 +17,6 @@ const Grid = ReactGridLayout.WidthProvider(ReactGridLayout);
 
 
 const App = (props) => {
-  // layout is an array of objects, see the demo for more complete usage
-  const layout = [
-    { i: TRANSIT_WIDGET_ID, x: 6, y: 0, w: 12, h: 10, minH: 6.5, minW: 7},
-    { i: GITHUB_WIDGET_ID, x: 3, y: 0, w: 6, h: 12 },
-    { i: SLACK_WIDGET_ID, x: 0, y: 0, w: 6, h: 10 },
-  ];
 
   var components = props.ids.map((component) => {
     if(component === TRANSIT_WIDGET_ID){
@@ -53,7 +47,7 @@ const App = (props) => {
     <div className='container'>
       <ModalAddWidget />
       <Button primary fluid onClick={props.showAddWidgetModal}><Icon name='add circle' />Add widget</Button>
-      <Grid verticalCompact={false} autclassName="layout" layout={layout} cols={12} rowHeight={30}>
+      <Grid verticalCompact={false} className="layout" layout={props.grid.layout} cols={12} rowHeight={30}>
         {components}
       </Grid>
     </div>
@@ -64,8 +58,8 @@ const App = (props) => {
 const mapStateToProps = (state, ownProps) => {
   const ids  = state.widgets.ids;
   const byId  = state.widgets.byId;
-
-  return { ids, byId };
+  const grid = state.widgets.grid;
+  return { ids, byId, grid };
 };
 
 export const mapDispatchToProps = dispatch => bindActionCreators({

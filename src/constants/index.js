@@ -5,3 +5,4 @@ export const GITHUB_WIDGET_ID = 'github';
 // reducers
 export const ADD_WIDGET = 'ADD_WIDGET';
 export const SHOW_ADD_WIDGET_MODAL = 'SHOW_ADD_WIDGET_MODAL';
+export const HIDE_ADD_WIDGET_MODAL = 'HIDE_ADD_WIDGET_MODAL';

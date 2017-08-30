@@ -10,24 +10,28 @@ import {
 import {
   addTransitWidget,
   addGithubWidget,
-  addSlackWidget
+  addSlackWidget,
+  hideAddWidgetModal,
 } from '../../actions';
 
 const ModalAddWidget = (props) => (
-  <Modal basic size='small' open={props.showAddWidgetModal}>
-    <Header icon='archive' content='Choose a widget' />
+  <Modal basic size='small' closeIcon='true' open={props.showAddWidgetModal}>
+    <Header icon='new pied piper' content='Choose a widget' />
     <Modal.Content>
       <p>You may only display one of each widget at this time.</p>
     </Modal.Content>
     <Modal.Actions>
-      <Button basic color='blue' onClick={props.addTransitWidget} inverted>
-        <Icon name='remove' /> Transit
+      <Button basic color='blue' onClick={props.addTransitWidget} inverted  disabled={props.ids.includes(TRANSIT_WIDGET_ID)}>
+        <Icon name='rocket' size='large'/> Transit
       </Button>
-      <Button basic color='blue' onClick={props.addGithubWidget} inverted>
-        <Icon name='remove' /> GitHub
+      <Button basic color='blue' onClick={props.addGithubWidget} inverted  disabled={props.ids.includes(GITHUB_WIDGET_ID)}>
+        <Icon name='github' size='large'/> GitHub
       </Button>
-      <Button basic color='blue' onClick={props.addSlackWidget} inverted>
-        <Icon name='remove' /> Slack
+      <Button basic color='blue' onClick={props.addSlackWidget} inverted  disabled={props.ids.includes(SLACK_WIDGET_ID)}>
+        <Icon name='slack' size='large' /> Slack
+      </Button>
+      <Button basic color='red' onClick={props.hideAddWidgetModal} inverted>
+        <Icon name='cancel' size='large' /> Cancel
       </Button>
     </Modal.Actions>
   </Modal>
@@ -35,13 +39,15 @@ const ModalAddWidget = (props) => (
 
 const mapStateToProps = (state, ownProps) => {
   const showAddWidgetModal  = state.widgets.showAddWidgetModal;
-  return { showAddWidgetModal };
+  const ids  = state.widgets.ids;
+  return { showAddWidgetModal, ids };
 };
 
 export const mapDispatchToProps = dispatch => bindActionCreators({
   addTransitWidget,
   addGithubWidget,
   addSlackWidget,
+  hideAddWidgetModal,
 },
 dispatch);
 

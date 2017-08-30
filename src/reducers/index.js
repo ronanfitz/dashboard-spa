@@ -9,12 +9,21 @@ import {
   GITHUB_WIDGET_ID,
   ADD_WIDGET,
   SHOW_ADD_WIDGET_MODAL,
+  HIDE_ADD_WIDGET_MODAL,
 } from '../constants';
 
 const initialState = {
-  ids: [GITHUB_WIDGET_ID],
+  ids: [],
   byId: {},
+  showSidebar: false,
   showAddWidgetModal: false,
+  grid: {
+    nextId: 1,
+    layout:[],
+    breakpoints: {lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0},
+    cols: {lg: 12, md: 10, sm: 6, xs: 4, xxs: 2},
+  },
+
 };
 
 
@@ -23,12 +32,19 @@ const widgets = (state = initialState, action) => {
   switch(action.type){
 
     case ADD_WIDGET:
-    console.log('state>>>>>', state);
+
       if(action.id === TRANSIT_WIDGET_ID && !state.ids.includes(TRANSIT_WIDGET_ID)){
         return {
           ...state,
           ids: [...state.ids, TRANSIT_WIDGET_ID],
           showAddWidgetModal: false,
+          grid: {
+            ...state.grid,
+            layout: [
+              ...state.grid.layout,
+              { i: TRANSIT_WIDGET_ID, x: 0, y: 0, w: 8, h: 8},
+            ]
+          }
         };
       }
       else if(action.id === GITHUB_WIDGET_ID && !state.ids.includes(GITHUB_WIDGET_ID)){
@@ -37,6 +53,13 @@ const widgets = (state = initialState, action) => {
           ...state,
           ids: [...state.ids, GITHUB_WIDGET_ID],
           showAddWidgetModal: false,
+          grid: {
+            ...state.grid,
+            layout: [
+              ...state.grid.layout,
+              { i: GITHUB_WIDGET_ID, x: 0, y: 8, w: 6, h: 6},
+            ]
+          }
         };
       }
       else if(action.id === SLACK_WIDGET_ID && !state.ids.includes(SLACK_WIDGET_ID)){
@@ -45,6 +68,13 @@ const widgets = (state = initialState, action) => {
           ...state,
           ids: [...state.ids, SLACK_WIDGET_ID],
           showAddWidgetModal: false,
+          grid: {
+            ...state.grid,
+            layout: [
+              ...state.grid.layout,
+              { i: SLACK_WIDGET_ID, x: 0, y: 16, w: 6, h: 4},
+            ]
+          }
         };
       }
       else{
@@ -58,6 +88,12 @@ const widgets = (state = initialState, action) => {
       return {
         ...state,
         showAddWidgetModal: true,
+      };
+
+    case HIDE_ADD_WIDGET_MODAL:
+      return {
+        ...state,
+        showAddWidgetModal: false,
       };
 
     default:
