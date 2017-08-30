@@ -21,21 +21,17 @@ const initialState = {
   showAddWidgetModal: false,
   grid: {
     nextId: 1,
-    layout:[],
-    breakpoints: {lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0},
-    cols: {lg: 12, md: 10, sm: 6, xs: 4, xxs: 2},
+    layout: [],
+    breakpoints: { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 },
+    cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
   },
-
 };
 
-
 const widgets = (state = initialState, action) => {
-
-  switch(action.type){
-
+  switch (action.type) {
     case ADD_WIDGET:
 
-      if(action.id === TRANSIT_WIDGET_ID && !state.ids.includes(TRANSIT_WIDGET_ID)){
+      if (action.id === TRANSIT_WIDGET_ID && !state.ids.includes(TRANSIT_WIDGET_ID)) {
         return {
           ...state,
           ids: [...state.ids, TRANSIT_WIDGET_ID],
@@ -44,13 +40,11 @@ const widgets = (state = initialState, action) => {
             ...state.grid,
             layout: [
               ...state.grid.layout,
-              { i: TRANSIT_WIDGET_ID, x: 0, y: 0, w: 6, h: 8},
-            ]
-          }
+              { i: TRANSIT_WIDGET_ID, x: 0, y: 0, w: 6, h: 8 },
+            ],
+          },
         };
-      }
-      else if(action.id === GITHUB_WIDGET_ID && !state.ids.includes(GITHUB_WIDGET_ID)){
-
+      } else if (action.id === GITHUB_WIDGET_ID && !state.ids.includes(GITHUB_WIDGET_ID)) {
         return {
           ...state,
           ids: [...state.ids, GITHUB_WIDGET_ID],
@@ -59,13 +53,11 @@ const widgets = (state = initialState, action) => {
             ...state.grid,
             layout: [
               ...state.grid.layout,
-              { i: GITHUB_WIDGET_ID, x: 6, y: 0, w: 6, h: 8},
-            ]
-          }
+              { i: GITHUB_WIDGET_ID, x: 6, y: 0, w: 6, h: 8 },
+            ],
+          },
         };
-      }
-      else if(action.id === SLACK_WIDGET_ID && !state.ids.includes(SLACK_WIDGET_ID)){
-
+      } else if (action.id === SLACK_WIDGET_ID && !state.ids.includes(SLACK_WIDGET_ID)) {
         return {
           ...state,
           ids: [...state.ids, SLACK_WIDGET_ID],
@@ -74,17 +66,15 @@ const widgets = (state = initialState, action) => {
             ...state.grid,
             layout: [
               ...state.grid.layout,
-              { i: SLACK_WIDGET_ID, x: 0, y: 8, w: 6, h: 6},
-            ]
-          }
+              { i: SLACK_WIDGET_ID, x: 0, y: 8, w: 6, h: 6 },
+            ],
+          },
         };
       }
-      else{
-        return {
-          ...state,
-          showAddWidgetModal: false,
-        };
-      }
+      return {
+        ...state,
+        showAddWidgetModal: false,
+      };
 
     case SHOW_ADD_WIDGET_MODAL:
       return {
@@ -121,7 +111,7 @@ const widgets = (state = initialState, action) => {
         showSidebar: state.ids.length === 0,
       };
   }
-}
+};
 
 const rootReducer = combineReducers({
   widgets,
