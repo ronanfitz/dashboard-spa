@@ -49,34 +49,35 @@ const App = (props) => {
   });
 
   return (
-    <div className='container'>
-
-      {props.showSidebar?<Button primary fluid onClick={props.hideDashboardSidebar}>Hide Sidebar</Button>:<Button primary fluid onClick={props.showDashboardSidebar}>Show Sidebar</Button>}
+    <div className='page-container'>
 
 
-      <Sidebar.Pushable as={Segment}>
-        <Sidebar as={Menu} animation='overlay' width='thin' direction='right' visible={props.showSidebar} icon='labeled' vertical inverted >
-          <Menu.Item name='Add_Widget' onClick={props.showAddWidgetModal}>
-            <Icon name='add circle' />
-            Add Widget
-          </Menu.Item>
-          <Menu.Item name='Settings'>
-            <Icon name='cogs' />
-            Settings
-          </Menu.Item>
-        </Sidebar>
-        <Sidebar.Pusher>
-          <Segment basic>
+
+      <div className='grid-container'>
+        <Sidebar.Pushable as={Segment}>
+          <Sidebar as={Menu} animation='overlay' width='thin' direction='right' visible={props.showSidebar} icon='labeled' vertical inverted >
+            <Menu.Item name='Add_Widget' onClick={props.showAddWidgetModal}>
+              <Icon name='add circle' />
+              Add Widget
+            </Menu.Item>
+            <Menu.Item name='Settings' disabled>
+              <Icon name='cogs' />
+              Settings
+            </Menu.Item>
+          </Sidebar>
+          <Sidebar.Pusher>
+            <Segment basic>
 
 
-            <Grid verticalCompact={false} className="layout" layout={props.grid.layout} cols={12} rowHeight={30} width={1200}>
-              {components}
-            </Grid>
+              <Grid verticalCompact={false} className="layout" layout={props.grid.layout} cols={12} rowHeight={30} width={1200}>
+                {components}
+              </Grid>
 
-          </Segment>
-        </Sidebar.Pusher>
-      </Sidebar.Pushable>
-
+            </Segment>
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
+      </div>
+      <div className='sideStrip' onClick={props.showSidebar?props.hideDashboardSidebar:props.showDashboardSidebar}><Icon name={props.showSidebar?'chevron right':'chevron left'}/></div>
 
       <ModalAddWidget />
 
