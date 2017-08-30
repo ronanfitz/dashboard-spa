@@ -2,6 +2,10 @@
   overflow: scroll;
 }
 
+.container {
+  height: 820px;
+}
+
 .react-grid-layout {
   position: relative;
   transition: height 200ms ease;

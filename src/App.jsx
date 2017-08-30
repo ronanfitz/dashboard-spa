@@ -2,14 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ReactGridLayout from 'react-grid-layout';
-import { Button, Icon, Sidebar } from 'semantic-ui-react'
+import { Button, Icon, Sidebar, Segment, Menu, Image, Header } from 'semantic-ui-react'
 import TransitComponent from '@databraid/transit-widget/lib';
 import SlackComponent from '@databraid/slack-widget/lib';
 import GithubComponent from '@databraid/github-widget/lib';
 import { TRANSIT_WIDGET_ID, SLACK_WIDGET_ID, GITHUB_WIDGET_ID } from './constants';
 import './App.css';
-import { showAddWidgetModal } from './actions';
+import {
+  showAddWidgetModal,
+  showDashboardSidebar,
+  hideDashboardSidebar
+} from './actions';
 import ModalAddWidget from './components/ModalAddWidget';
+
 
 const Grid = ReactGridLayout.WidthProvider(ReactGridLayout);
 
@@ -45,11 +50,37 @@ const App = (props) => {
 
   return (
     <div className='container'>
+
+      {props.showSidebar?<Button primary fluid onClick={props.hideDashboardSidebar}>Hide Sidebar</Button>:<Button primary fluid onClick={props.showDashboardSidebar}>Show Sidebar</Button>}
+
+
+      <Sidebar.Pushable as={Segment}>
+        <Sidebar as={Menu} animation='overlay' width='thin' direction='right' visible={props.showSidebar} icon='labeled' vertical inverted >
+          <Menu.Item name='Add_Widget' onClick={props.showAddWidgetModal}>
+            <Icon name='add circle' />
+            Add Widget
+          </Menu.Item>
+          <Menu.Item name='Settings'>
+            <Icon name='cogs' />
+            Settings
+          </Menu.Item>
+        </Sidebar>
+        <Sidebar.Pusher>
+          <Segment basic>
+
+
+            <Grid verticalCompact={false} className="layout" layout={props.grid.layout} cols={12} rowHeight={30} width={1200}>
+              {components}
+            </Grid>
+
+          </Segment>
+        </Sidebar.Pusher>
+      </Sidebar.Pushable>
+
+
       <ModalAddWidget />
-      <Button primary fluid onClick={props.showAddWidgetModal}><Icon name='add circle' />Add widget</Button>
-      <Grid verticalCompact={false} className="layout" layout={props.grid.layout} cols={12} rowHeight={30}>
-        {components}
-      </Grid>
+
+
     </div>
   );
 };
@@ -59,11 +90,14 @@ const mapStateToProps = (state, ownProps) => {
   const ids  = state.widgets.ids;
   const byId  = state.widgets.byId;
   const grid = state.widgets.grid;
-  return { ids, byId, grid };
+  const showSidebar  = state.widgets.showSidebar;
+  return { ids, byId, grid, showSidebar };
 };
 
 export const mapDispatchToProps = dispatch => bindActionCreators({
   showAddWidgetModal,
+  showDashboardSidebar,
+  hideDashboardSidebar,
 },
 dispatch);
 

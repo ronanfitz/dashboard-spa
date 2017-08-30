@@ -10,6 +10,8 @@ import {
   ADD_WIDGET,
   SHOW_ADD_WIDGET_MODAL,
   HIDE_ADD_WIDGET_MODAL,
+  SHOW_DASHBOARD_SIDEBAR,
+  HIDE_DASHBOARD_SIDEBAR,
 } from '../constants';
 
 const initialState = {
@@ -42,7 +44,7 @@ const widgets = (state = initialState, action) => {
             ...state.grid,
             layout: [
               ...state.grid.layout,
-              { i: TRANSIT_WIDGET_ID, x: 0, y: 0, w: 8, h: 8},
+              { i: TRANSIT_WIDGET_ID, x: 0, y: 0, w: 6, h: 8},
             ]
           }
         };
@@ -57,7 +59,7 @@ const widgets = (state = initialState, action) => {
             ...state.grid,
             layout: [
               ...state.grid.layout,
-              { i: GITHUB_WIDGET_ID, x: 0, y: 8, w: 6, h: 6},
+              { i: GITHUB_WIDGET_ID, x: 6, y: 0, w: 6, h: 8},
             ]
           }
         };
@@ -72,7 +74,7 @@ const widgets = (state = initialState, action) => {
             ...state.grid,
             layout: [
               ...state.grid.layout,
-              { i: SLACK_WIDGET_ID, x: 0, y: 16, w: 6, h: 4},
+              { i: SLACK_WIDGET_ID, x: 0, y: 8, w: 6, h: 6},
             ]
           }
         };
@@ -88,6 +90,7 @@ const widgets = (state = initialState, action) => {
       return {
         ...state,
         showAddWidgetModal: true,
+        showSidebar: false,
       };
 
     case HIDE_ADD_WIDGET_MODAL:
@@ -96,13 +99,26 @@ const widgets = (state = initialState, action) => {
         showAddWidgetModal: false,
       };
 
+    case SHOW_DASHBOARD_SIDEBAR:
+      return {
+        ...state,
+        showSidebar: true,
+      };
+
+    case HIDE_DASHBOARD_SIDEBAR:
+      return {
+        ...state,
+        showSidebar: false,
+      };
+
     default:
       return {
         ...state,
         byId: {
           [TRANSIT_WIDGET_ID]: transitReducer(state.byId[TRANSIT_WIDGET_ID], action),
           [GITHUB_WIDGET_ID]: githubReducer(state.byId[GITHUB_WIDGET_ID], action),
-        }
+        },
+        showSidebar: state.ids.length === 0,
       };
   }
 }

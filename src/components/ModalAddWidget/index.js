@@ -15,7 +15,7 @@ import {
 } from '../../actions';
 
 const ModalAddWidget = (props) => (
-  <Modal basic size='small' closeIcon='true' open={props.showAddWidgetModal}>
+  <Modal basic size='small' open={props.showAddWidgetModal}>
     <Header icon='new pied piper' content='Choose a widget' />
     <Modal.Content>
       <p>You may only display one of each widget at this time.</p>
