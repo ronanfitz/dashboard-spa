@@ -8,6 +8,7 @@ import {
   SLACK_WIDGET_ID,
   GITHUB_WIDGET_ID,
   ADD_WIDGET,
+  REMOVE_WIDGET,
   SHOW_ADD_WIDGET_MODAL,
   HIDE_ADD_WIDGET_MODAL,
   SHOW_DASHBOARD_SIDEBAR,
@@ -74,6 +75,20 @@ const widgets = (state = initialState, action) => {
       return {
         ...state,
         showAddWidgetModal: false,
+      };
+
+    case REMOVE_WIDGET:
+      var newIds = [...state.ids];
+      const removeIndex = newIds.indexOf(action.id);
+
+      if(removeIndex > -1){
+        console.log('Removing widget - ', action.id);
+        newIds.splice(removeIndex, 1);
+      }
+      
+      return {
+        ...state,
+        ids: newIds
       };
 
     case SHOW_ADD_WIDGET_MODAL:

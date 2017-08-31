@@ -1,5 +1,6 @@
 import {
   ADD_WIDGET,
+  REMOVE_WIDGET,
   SHOW_ADD_WIDGET_MODAL,
   HIDE_ADD_WIDGET_MODAL,
   SHOW_DASHBOARD_SIDEBAR,
@@ -8,6 +9,10 @@ import {
 
 export function addWidget(widgetType) {
   return { type: ADD_WIDGET, id: widgetType };
+}
+
+export function removeWidget(widgetId) {
+  return { type: REMOVE_WIDGET, id: widgetId };
 }
 
 export function showAddWidgetModal() {
