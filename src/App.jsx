@@ -30,6 +30,14 @@ const App = (props) => {
 
   return (
     <div className="page-container">
+      <div
+        role="link"
+        tabIndex="-1"
+        className="sideStrip"
+        onClick={props.showSidebar ? props.hideDashboardSidebar : props.showDashboardSidebar}
+      >
+        <Icon name={props.showSidebar ? 'chevron right' : 'chevron left'} />
+      </div>
       <div className="grid-container">
         <Sidebar.Pushable as={Segment}>
           <Sidebar
@@ -69,14 +77,7 @@ const App = (props) => {
           </Sidebar.Pusher>
         </Sidebar.Pushable>
       </div>
-      <div
-        role="link"
-        tabIndex="-1"
-        className="sideStrip"
-        onClick={props.showSidebar ? props.hideDashboardSidebar : props.showDashboardSidebar}
-      >
-        <Icon name={props.showSidebar ? 'chevron right' : 'chevron left'} />
-      </div>
+
 
       <ModalAddWidget />
     </div>

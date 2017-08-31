@@ -17,16 +17,26 @@ import {
 
 const WidgetContainer = (props) => {
 
-
-
   if (props.id === TRANSIT_WIDGET_ID) {
-    return <TransitComponent widgetId={props.id} />;
+    return (
+      <div className="widget-container">
+        <TransitComponent widgetId={props.id} />
+      </div>
+    );
   }
   if (props.id === GITHUB_WIDGET_ID) {
-    return <GithubComponent widgetId={props.id} />;
+    return (
+      <div className="widget-container">
+        <GithubComponent widgetId={props.id} />
+      </div>
+    );
   }
   if (props.id === SLACK_WIDGET_ID) {
-    return <SlackComponent widgetId={props.id} />;
+    return (
+      <div className="widget-container">
+        <SlackComponent widgetId={props.id} />
+      </div>
+    );
   }
   return (
     <div key={props.id} />
