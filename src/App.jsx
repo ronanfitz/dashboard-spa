@@ -33,7 +33,7 @@ const App = (props) => {
       <div
         role="link"
         tabIndex="-1"
-        className="sideStrip"
+        className="side-strip"
         onClick={props.showSidebar ? props.hideDashboardSidebar : props.showDashboardSidebar}
       >
         <Icon name={props.showSidebar ? 'chevron right' : 'chevron left'} />

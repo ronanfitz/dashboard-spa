@@ -4,6 +4,7 @@ export const SLACK_WIDGET_ID = 'slack';
 export const GITHUB_WIDGET_ID = 'github';
 // reducers
 export const ADD_WIDGET = 'ADD_WIDGET';
+export const REMOVE_WIDGET = 'REMOVE_WIDGET';
 export const SHOW_ADD_WIDGET_MODAL = 'SHOW_ADD_WIDGET_MODAL';
 export const HIDE_ADD_WIDGET_MODAL = 'HIDE_ADD_WIDGET_MODAL';
 export const SHOW_DASHBOARD_SIDEBAR = 'SHOW_DASHBOARD_SIDEBAR';

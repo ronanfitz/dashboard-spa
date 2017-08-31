@@ -11,15 +11,18 @@ import {
   SLACK_WIDGET_ID,
   GITHUB_WIDGET_ID,
 } from '../../constants';
-// import {
-//   removeWidget,
-// } from '../../actions';
+import {
+  removeWidget,
+} from '../../actions';
 
 const WidgetContainer = (props) => {
 
   if (props.id === TRANSIT_WIDGET_ID) {
     return (
       <div className="widget-container">
+        <div className="side-strip">
+          <Icon className="close-widget" name="remove" onClick={() => props.removeWidget(props.id)}/>
+        </div>
         <TransitComponent widgetId={props.id} />
       </div>
     );
@@ -27,6 +30,9 @@ const WidgetContainer = (props) => {
   if (props.id === GITHUB_WIDGET_ID) {
     return (
       <div className="widget-container">
+      <div className="side-strip">
+        <Icon className="close-widget" name="remove" onClick={() => props.removeWidget(props.id)}/>
+      </div>
         <GithubComponent widgetId={props.id} />
       </div>
     );
@@ -34,6 +40,9 @@ const WidgetContainer = (props) => {
   if (props.id === SLACK_WIDGET_ID) {
     return (
       <div className="widget-container">
+      <div className="side-strip">
+        <Icon className="close-widget" name="remove" onClick={() => props.removeWidget(props.id)}/>
+      </div>
         <SlackComponent widgetId={props.id} />
       </div>
     );
@@ -56,7 +65,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 export const mapDispatchToProps = dispatch => bindActionCreators({
-  // removeWidget,
+  removeWidget,
 },
 dispatch);
 
