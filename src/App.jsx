@@ -14,37 +14,18 @@ import {
   showDashboardSidebar,
   hideDashboardSidebar,
 } from './actions';
-/* eslint-disable import/no-named-as-default */
-import ModalAddWidget from './components/ModalAddWidget';
+import ModalAddWidget from './components/ModalAddWidget/index.jsx';
+import WidgetContainer from './components/WidgetContainer/index.jsx';
 
 const Grid = ReactGridLayout.WidthProvider(ReactGridLayout);
 
-export const App = (props) => {
-  const components = (props.ids).map((widgetId) => {
-    if (widgetId === TRANSIT_WIDGET_ID) {
-      return (
-        <div key={widgetId}>
-          <TransitComponent widgetId={widgetId} />
-        </div>
-      );
-    }
-    if (widgetId === GITHUB_WIDGET_ID) {
-      return (
-        <div key={widgetId}>
-          <GithubComponent widgetId={widgetId} />
-        </div>
-      );
-    }
-    if (widgetId === SLACK_WIDGET_ID) {
-      return (
-        <div key={widgetId}>
-          <SlackComponent widgetId={widgetId} />
-        </div>
-      );
-    }
+const App = (props) => {
+  const components = (props.ids).map((component) => {
     return (
-      <div key={widgetId} />
-    );
+      <div key={component}>
+        <WidgetContainer id={component} />
+      </div>
+    )
   });
 
   return (
