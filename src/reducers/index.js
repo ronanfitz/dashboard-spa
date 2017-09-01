@@ -40,7 +40,6 @@ const initialState = {
 };
 
 const widgets = (state = initialState, action) => {
-  console.log(state);
   switch (action.type) {
     case ADD_WIDGET:
 
