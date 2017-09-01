@@ -1,9 +1,6 @@
 import React from 'react';
 import {
-  Button,
-  Header,
   Icon,
-  Modal,
   Sidebar,
   Segment,
   Menu
@@ -24,76 +21,54 @@ import {
   showWidgetSidebar,
   hideWidgetSidebar,
 } from '../../actions';
+import WidgetSidestrip from '../WidgetSidestrip/index.jsx';
+
 
 const WidgetContainer = (props) => {
+
+  var component;
   if (props.id === TRANSIT_WIDGET_ID) {
-    return (
-      <div className="widget-container">
-      
-        <div className="side-strip" id="">
-          <Icon
-            className="close-widget"
-            name={props.showSidebar ? 'chevron right' : 'ellipsis vertical'}
-            onClick={props.showSidebar ? () => props.hideWidgetSidebar(props.id) : () => props.showWidgetSidebar(props.id)}
-          />
-        </div>
-
-
-
-        <Sidebar.Pushable as={Segment}>
-          <Sidebar
-            as={Menu}
-            animation="overlay"
-            width="thin"
-            direction="right"
-            visible={props.showSidebar}
-            icon="labeled"
-            vertical
-            inverted
-          >
-            <Menu.Item name="delete-widget" onClick={() => props.removeWidget(props.id)}>
-              <Icon name="remove" />
-              Delete Widget
-            </Menu.Item>
-            <Menu.Item name="settings" disabled>
-              <Icon name="tasks" />
-              Configs
-            </Menu.Item>
-          </Sidebar>
-          <Sidebar.Pusher>
-            <Segment basic>
-
-              <TransitComponent widgetId={props.id} />
-
-            </Segment>
-          </Sidebar.Pusher>
-        </Sidebar.Pushable>
-
-      </div>
-    );
+    component = <TransitComponent widgetId={props.id} />
   }
-  if (props.id === GITHUB_WIDGET_ID) {
-    return (
-      <div className="widget-container">
-      <div className="side-strip">
-        <Icon className="close-widget" name="remove" onClick={() => props.removeWidget(props.id)}/>
-      </div>
-        <GithubComponent widgetId={props.id} />
-      </div>
-    );
+  else if (props.id === GITHUB_WIDGET_ID){
+    component = <GithubComponent widgetId={props.id} />
   }
-  if (props.id === SLACK_WIDGET_ID) {
-    return (
-      <div className="widget-container">
-      <div className="side-strip">
-        <Icon className="close-widget" name="remove" onClick={() => props.removeWidget(props.id)}/>
-      </div>
-        <SlackComponent widgetId={props.id} />
-      </div>
-    );
+  else if (props.id === SLACK_WIDGET_ID){
+    component = <SlackComponent widgetId={props.id} />
   }
+
   return (
-    <div key={props.id} />
+    <div className="widget-container">
+
+      <WidgetSidestrip id={props.id} />
+
+      <Sidebar.Pushable as={Segment}>
+        <Sidebar
+          as={Menu}
+          animation="overlay"
+          width="thin"
+          direction="right"
+          visible={props.showSidebar}
+          icon="labeled"
+          vertical
+          inverted
+        >
+          <Menu.Item name="delete-widget" onClick={() => props.removeWidget(props.id)}>
+            <Icon name="remove" />
+            Delete Widget
+          </Menu.Item>
+          <Menu.Item name="settings" disabled>
+            <Icon name="tasks" />
+            Configs
+          </Menu.Item>
+        </Sidebar>
+        <Sidebar.Pusher>
+          <Segment basic>
+            {component}
+          </Segment>
+        </Sidebar.Pusher>
+      </Sidebar.Pushable>
+    </div>
   );
 }
 
@@ -106,7 +81,7 @@ WidgetContainer.propTypes = {
 const mapStateToProps = (state, ownProps) => {
   const ids = state.widgets.ids;
   const id = ownProps.id;
-  const showSidebar = state.widgets.metadata.transit.showSidebar;//TODO - un-hardcode
+  const showSidebar = state.widgets.metadata[ownProps.id].showSidebar;
   return { ids, id, showSidebar };
 };
 

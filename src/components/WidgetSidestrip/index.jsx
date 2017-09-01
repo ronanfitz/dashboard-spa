@@ -8,17 +8,19 @@ import {
   hideWidgetSidebar,
 } from '../../actions';
 
-const WidgetSidebar = (props) => {
-  <div className="side-strip">
-    <Icon
-      className="close-widget"
-      name={props.showSidebar ? 'chevron right' : 'ellipsis vertical'}
-      onClick={props.showSidebar ? () => props.hideWidgetSidebar(props.id) : () => props.showWidgetSidebar(props.id)}
-    />
-  </div>
+const WidgetSidestrip = (props) => {
+  return (
+    <div className="side-strip">
+      <Icon
+        className="close-widget"
+        name={props.showSidebar ? 'chevron right' : 'ellipsis vertical'}
+        onClick={props.showSidebar ? () => props.hideWidgetSidebar(props.id) : () => props.showWidgetSidebar(props.id)}
+      />
+    </div>
+  );
 }
 
-WidgetSidebar.propTypes = {
+WidgetSidestrip.propTypes = {
   ids: PropTypes.arrayOf(PropTypes.string).isRequired,
   id: PropTypes.number.isRequired,
   removeWidget: PropTypes.func.isRequired,
@@ -26,7 +28,8 @@ WidgetSidebar.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
   const id = ownProps.id;
-  return { id };
+  const showSidebar = state.widgets.metadata[ownProps.id].showSidebar;
+  return { id, showSidebar };
 };
 
 export const mapDispatchToProps = dispatch => bindActionCreators({
@@ -39,4 +42,4 @@ dispatch);
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(WidgetSidebar);
+)(WidgetSidestrip);
