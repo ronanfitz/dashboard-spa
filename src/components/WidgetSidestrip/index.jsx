@@ -10,11 +10,13 @@ import {
 
 const WidgetSidestrip = (props) => {
   return (
-    <div className="side-strip">
+    <div
+      className="side-strip"
+      onClick={props.showSidebar ? () => props.hideWidgetSidebar(props.id) : () => props.showWidgetSidebar(props.id)}
+    >
       <Icon
         className="close-widget"
         name={props.showSidebar ? 'chevron right' : 'ellipsis vertical'}
-        onClick={props.showSidebar ? () => props.hideWidgetSidebar(props.id) : () => props.showWidgetSidebar(props.id)}
       />
     </div>
   );
