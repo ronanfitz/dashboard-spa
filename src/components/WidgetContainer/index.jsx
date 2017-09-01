@@ -39,8 +39,7 @@ const WidgetContainer = (props) => {
 
   return (
     <div className="widget-container">
-
-      <WidgetSidestrip id={props.id} />
+      {props.locked ? null : <WidgetSidestrip id={props.id} />}
 
       <Sidebar.Pushable as={Segment}>
         <Sidebar
@@ -55,7 +54,7 @@ const WidgetContainer = (props) => {
         >
           <Menu.Item name="delete-widget" onClick={() => props.removeWidget(props.id)}>
             <Icon name="remove" />
-            Delete Widget
+            Delete
           </Menu.Item>
           <Menu.Item name="settings" disabled>
             <Icon name="tasks" />
@@ -74,7 +73,9 @@ const WidgetContainer = (props) => {
 
 WidgetContainer.propTypes = {
   ids: PropTypes.arrayOf(PropTypes.string).isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
+  showSidebar: PropTypes.bool.isRequired,
+  locked: PropTypes.bool.isRequired,
   removeWidget: PropTypes.func.isRequired,
 };
 
@@ -82,7 +83,8 @@ const mapStateToProps = (state, ownProps) => {
   const ids = state.widgets.ids;
   const id = ownProps.id;
   const showSidebar = state.widgets.metadata[ownProps.id].showSidebar;
-  return { ids, id, showSidebar };
+  const locked = state.widgets.locked;
+  return { ids, id, showSidebar, locked };
 };
 
 export const mapDispatchToProps = dispatch => bindActionCreators({

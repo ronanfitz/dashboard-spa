@@ -20,6 +20,8 @@ import {
   HIDE_DASHBOARD_SIDEBAR,
   SHOW_WIDGET_SIDEBAR,
   HIDE_WIDGET_SIDEBAR,
+  LOCK_DASHBOARD,
+  UNLOCK_DASHBOARD,
 } from '../constants';
 
 const initialState = {
@@ -37,7 +39,8 @@ const initialState = {
   metadata: {},
 };
 
-export const widgets = (state = initialState, action) => {
+const widgets = (state = initialState, action) => {
+  console.log(state);
   switch (action.type) {
     case ADD_WIDGET:
 
@@ -180,6 +183,40 @@ export const widgets = (state = initialState, action) => {
           }
         }
       };
+
+    case LOCK_DASHBOARD:
+      var newLayout = state.grid.layout.map( layoutObj => {
+        return {
+          ...layoutObj,
+          static: true
+        }
+      });
+      return {
+        ...state,
+        showSidebar: false,
+        locked: true,
+        grid: {
+          ...state.grid,
+          layout: newLayout
+        }
+      }
+
+    case UNLOCK_DASHBOARD:
+    var newLayout = state.grid.layout.map( layoutObj => {
+      return {
+        ...layoutObj,
+        static: false
+      }
+    });
+      return {
+        ...state,
+        showSidebar: false,
+        locked: false,
+        grid: {
+          ...state.grid,
+          layout: newLayout
+        }
+      }
 
     default:
       return {

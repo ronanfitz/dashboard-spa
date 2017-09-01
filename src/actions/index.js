@@ -7,6 +7,8 @@ import {
   HIDE_DASHBOARD_SIDEBAR,
   SHOW_WIDGET_SIDEBAR,
   HIDE_WIDGET_SIDEBAR,
+  LOCK_DASHBOARD,
+  UNLOCK_DASHBOARD,
 } from '../constants';
 
 export function addWidget(widgetType) {
@@ -39,5 +41,13 @@ export function showWidgetSidebar(widgetId) {
 
 export function hideWidgetSidebar(widgetId) {
   return { type: HIDE_WIDGET_SIDEBAR, id: widgetId };
+}
+
+export function lockDashboard() {
+  return { type: LOCK_DASHBOARD };
+}
+
+export function unlockDashboard() {
+  return { type: UNLOCK_DASHBOARD };
 }
 
