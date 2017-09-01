@@ -5,6 +5,8 @@ import {
   HIDE_ADD_WIDGET_MODAL,
   SHOW_DASHBOARD_SIDEBAR,
   HIDE_DASHBOARD_SIDEBAR,
+  SHOW_WIDGET_SIDEBAR,
+  HIDE_WIDGET_SIDEBAR,
 } from '../constants';
 
 export function addWidget(widgetType) {
@@ -29,5 +31,13 @@ export function showDashboardSidebar() {
 
 export function hideDashboardSidebar() {
   return { type: HIDE_DASHBOARD_SIDEBAR };
+}
+
+export function showWidgetSidebar(widgetId) {
+  return { type: SHOW_WIDGET_SIDEBAR, id: widgetId };
+}
+
+export function hideWidgetSidebar(widgetId) {
+  return { type: HIDE_WIDGET_SIDEBAR, id: widgetId };
 }
 

@@ -7,12 +7,17 @@ import {
   TRANSIT_WIDGET_ID,
   SLACK_WIDGET_ID,
   GITHUB_WIDGET_ID,
+  TRANSIT_WIDGET,
+  SLACK_WIDGET,
+  GITHUB_WIDGET,
   ADD_WIDGET,
   REMOVE_WIDGET,
   SHOW_ADD_WIDGET_MODAL,
   HIDE_ADD_WIDGET_MODAL,
   SHOW_DASHBOARD_SIDEBAR,
   HIDE_DASHBOARD_SIDEBAR,
+  SHOW_WIDGET_SIDEBAR,
+  HIDE_WIDGET_SIDEBAR,
 } from '../constants';
 
 const initialState = {
@@ -25,6 +30,16 @@ const initialState = {
     layout: [],
     breakpoints: { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 },
     cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
+  },
+  metadata: {
+    transit: { //TODO - un-hardcode
+      type: TRANSIT_WIDGET,
+      standardWidth: 6,
+      standardHeight: 8,
+      minWidth: 4,
+      minHeight: 4,
+      showSidebar: true,
+    }
   },
 };
 
@@ -41,8 +56,19 @@ const widgets = (state = initialState, action) => {
             ...state.grid,
             layout: [
               ...state.grid.layout,
-              { i: TRANSIT_WIDGET_ID, x: 0, y: 0, w: 6, h: 8 },
+              { i: TRANSIT_WIDGET_ID, x: 0, y: 0, w: 6, h: 8, static: false, },
             ],
+          },
+          metadata: {
+            ...state.metadata,
+            [action.id]: {
+              type: TRANSIT_WIDGET,
+              standardWidth: 6,
+              standardHeight: 8,
+              minWidth: 4,
+              minHeight: 4,
+              showSidebar: false,
+            }
           },
         };
       } else if (action.id === GITHUB_WIDGET_ID && !state.ids.includes(GITHUB_WIDGET_ID)) {
@@ -54,8 +80,19 @@ const widgets = (state = initialState, action) => {
             ...state.grid,
             layout: [
               ...state.grid.layout,
-              { i: GITHUB_WIDGET_ID, x: 6, y: 0, w: 6, h: 8 },
+              { i: GITHUB_WIDGET_ID, x: 6, y: 0, w: 6, h: 8, static: false, },
             ],
+          },
+          metadata: {
+            ...state.metadata,
+            [action.id]: {
+              type: GITHUB_WIDGET,
+              standardWidth: 6,
+              standardHeight: 8,
+              minWidth: 4,
+              minHeight: 4,
+              showSidebar: false,
+            }
           },
         };
       } else if (action.id === SLACK_WIDGET_ID && !state.ids.includes(SLACK_WIDGET_ID)) {
@@ -67,8 +104,19 @@ const widgets = (state = initialState, action) => {
             ...state.grid,
             layout: [
               ...state.grid.layout,
-              { i: SLACK_WIDGET_ID, x: 0, y: 8, w: 6, h: 6 },
+              { i: SLACK_WIDGET_ID, x: 0, y: 8, w: 6, h: 6, static: false, },
             ],
+          },
+          metadata: {
+            ...state.metadata,
+            [action.id]: {
+              type: SLACK_WIDGET,
+              standardWidth: 6,
+              standardHeight: 6,
+              minWidth: 4,
+              minHeight: 4,
+              showSidebar: false,
+            }
           },
         };
       }
@@ -82,10 +130,9 @@ const widgets = (state = initialState, action) => {
       const removeIndex = newIds.indexOf(action.id);
 
       if(removeIndex > -1){
-        console.log('Removing widget - ', action.id);
         newIds.splice(removeIndex, 1);
       }
-      
+
       return {
         ...state,
         ids: newIds
@@ -114,6 +161,30 @@ const widgets = (state = initialState, action) => {
       return {
         ...state,
         showSidebar: false,
+      };
+
+    case SHOW_WIDGET_SIDEBAR:
+      return {
+        ...state,
+        metadata: {
+          ...state.metadata,
+          [action.id]: {
+            ...state.metadata[action.id],
+            showSidebar: true
+          }
+        }
+      };
+
+    case HIDE_WIDGET_SIDEBAR:
+      return {
+        ...state,
+        metadata: {
+          ...state.metadata,
+          [action.id]: {
+            ...state.metadata[action.id],
+            showSidebar: false
+          }
+        }
       };
 
     default:
