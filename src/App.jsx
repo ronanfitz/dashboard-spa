@@ -15,7 +15,6 @@ import {
 import ModalAddWidget from './components/ModalAddWidget/index.jsx';
 import WidgetContainer from './components/WidgetContainer/index.jsx';
 
-
 const Grid = ReactGridLayout.WidthProvider(ReactGridLayout);
 
 const App = (props) => {
@@ -26,7 +25,7 @@ const App = (props) => {
       </div>
     )
   });
-
+console.log("ids length = ", props.ids.length);
   return (
     <div className="page-container">
       <div
@@ -53,10 +52,11 @@ const App = (props) => {
               <Icon name="add circle" />
               Add Widget
             </Menu.Item>
-            <Menu.Item name="lock-unlock-dashboard" onClick={props.locked ? props.unlockDashboard : props.lockDashboard}>
+            {props.ids.length ? <Menu.Item name="lock-unlock-dashboard" onClick={props.locked ? props.unlockDashboard : props.lockDashboard} >
               <Icon name={props.locked ? "unlock" : "lock"} />
               {props.locked ? "Unlock" : "Lock"}
             </Menu.Item>
+            : null }
             <Menu.Item name="settings" disabled>
               <Icon name="setting" />
               Settings
