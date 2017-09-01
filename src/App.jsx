@@ -4,10 +4,6 @@ import { bindActionCreators } from 'redux';
 import ReactGridLayout from 'react-grid-layout';
 import { Icon, Sidebar, Segment, Menu } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import TransitComponent from '@databraid/transit-widget/lib';
-import SlackComponent from '@databraid/slack-widget/lib';
-import GithubComponent from '@databraid/github-widget/lib';
-import { TRANSIT_WIDGET_ID, SLACK_WIDGET_ID, GITHUB_WIDGET_ID } from './constants';
 import './App.css';
 import {
   showAddWidgetModal,
@@ -16,7 +12,7 @@ import {
 } from './actions';
 import ModalAddWidget from './components/ModalAddWidget/index.jsx';
 import WidgetContainer from './components/WidgetContainer/index.jsx';
-import WidgetSidebar from './components/WidgetSidebar/index.jsx';
+
 
 const Grid = ReactGridLayout.WidthProvider(ReactGridLayout);
 
@@ -100,8 +96,7 @@ App.propTypes = {
     static: PropTypes.bool,
   })).isRequired,
   showSidebar: PropTypes.bool.isRequired,
-  transitShowSidebar: PropTypes.bool.isRequired,
-  showAddWidgetModal: PropTypes.func.isRequired, //TODO: correct - make metadata
+  showAddWidgetModal: PropTypes.func.isRequired,
   showDashboardSidebar: PropTypes.func.isRequired,
   hideDashboardSidebar: PropTypes.func.isRequired,
 };
@@ -110,8 +105,7 @@ const mapStateToProps = (state) => {
   const ids = state.widgets.ids;
   const layout = state.widgets.grid.layout;
   const showSidebar = state.widgets.showSidebar;
-  const transitShowSidebar = state.widgets.metadata.transit.showSidebar;
-  return { ids, layout, showSidebar, transitShowSidebar };
+  return { ids, layout, showSidebar };
 };
 
 export const mapDispatchToProps = dispatch => bindActionCreators({

@@ -25,22 +25,14 @@ const initialState = {
   byId: {},
   showSidebar: false,
   showAddWidgetModal: false,
+  locked: false,
   grid: {
     nextId: 1,
     layout: [],
     breakpoints: { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 },
     cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
   },
-  metadata: {
-    transit: { //TODO - un-hardcode
-      type: TRANSIT_WIDGET,
-      standardWidth: 6,
-      standardHeight: 8,
-      minWidth: 4,
-      minHeight: 4,
-      showSidebar: true,
-    }
-  },
+  metadata: {},
 };
 
 const widgets = (state = initialState, action) => {
