@@ -9,6 +9,8 @@ import {
   showAddWidgetModal,
   showDashboardSidebar,
   hideDashboardSidebar,
+  lockDashboard,
+  unlockDashboard,
 } from './actions';
 import ModalAddWidget from './components/ModalAddWidget/index.jsx';
 import WidgetContainer from './components/WidgetContainer/index.jsx';
@@ -51,9 +53,9 @@ const App = (props) => {
               <Icon name="add circle" />
               Add Widget
             </Menu.Item>
-            <Menu.Item name="lock" disabled>
-              <Icon name="lock" />
-              Lock
+            <Menu.Item name="lock-unlock-dashboard" onClick={props.locked ? props.unlockDashboard : props.lockDashboard}>
+              <Icon name={props.locked ? "unlock" : "lock"} />
+              {props.locked ? "Unlock" : "Lock"}
             </Menu.Item>
             <Menu.Item name="settings" disabled>
               <Icon name="setting" />
@@ -105,13 +107,16 @@ const mapStateToProps = (state) => {
   const ids = state.widgets.ids;
   const layout = state.widgets.grid.layout;
   const showSidebar = state.widgets.showSidebar;
-  return { ids, layout, showSidebar };
+  const locked = state.widgets.locked;
+  return { ids, layout, showSidebar, locked };
 };
 
 export const mapDispatchToProps = dispatch => bindActionCreators({
   showAddWidgetModal,
   showDashboardSidebar,
   hideDashboardSidebar,
+  lockDashboard,
+  unlockDashboard,
 },
 dispatch);
 

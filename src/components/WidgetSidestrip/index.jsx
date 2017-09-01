@@ -21,9 +21,7 @@ const WidgetSidestrip = (props) => {
 }
 
 WidgetSidestrip.propTypes = {
-  ids: PropTypes.arrayOf(PropTypes.string).isRequired,
-  id: PropTypes.number.isRequired,
-  removeWidget: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {
