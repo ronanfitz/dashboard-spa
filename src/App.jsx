@@ -25,7 +25,7 @@ const App = (props) => {
       </div>
     )
   });
-console.log("ids length = ", props.ids.length);
+
   return (
     <div className="page-container">
       <div

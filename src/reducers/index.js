@@ -184,36 +184,34 @@ const widgets = (state = initialState, action) => {
       };
 
     case LOCK_DASHBOARD:
-      var newLayout = state.grid.layout.map( layoutObj => {
-        return {
-          ...layoutObj,
-          static: true
-        }
-      });
       return {
         ...state,
         showSidebar: false,
         locked: true,
         grid: {
           ...state.grid,
-          layout: newLayout
+          layout: state.grid.layout.map( layoutObj => {
+            return {
+              ...layoutObj,
+              static: true
+            }
+          })
         }
       }
 
     case UNLOCK_DASHBOARD:
-    var newLayout = state.grid.layout.map( layoutObj => {
-      return {
-        ...layoutObj,
-        static: false
-      }
-    });
       return {
         ...state,
         showSidebar: false,
         locked: false,
         grid: {
           ...state.grid,
-          layout: newLayout
+          layout: state.grid.layout.map( layoutObj => {
+            return {
+              ...layoutObj,
+              static: false
+            }
+          })
         }
       }
 
