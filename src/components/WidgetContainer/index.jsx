@@ -1,5 +1,13 @@
 import React from 'react';
-import { Button, Header, Icon, Modal } from 'semantic-ui-react';
+import {
+  Button,
+  Header,
+  Icon,
+  Modal,
+  Sidebar,
+  Segment,
+  Menu
+} from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -13,17 +21,54 @@ import {
 } from '../../constants';
 import {
   removeWidget,
+  showWidgetSidebar,
+  hideWidgetSidebar,
 } from '../../actions';
 
 const WidgetContainer = (props) => {
-
   if (props.id === TRANSIT_WIDGET_ID) {
     return (
       <div className="widget-container">
-        <div className="side-strip">
-          <Icon className="close-widget" name="remove" onClick={() => props.removeWidget(props.id)}/>
+      
+        <div className="side-strip" id="">
+          <Icon
+            className="close-widget"
+            name={props.showSidebar ? 'chevron right' : 'ellipsis vertical'}
+            onClick={props.showSidebar ? () => props.hideWidgetSidebar(props.id) : () => props.showWidgetSidebar(props.id)}
+          />
         </div>
-        <TransitComponent widgetId={props.id} />
+
+
+
+        <Sidebar.Pushable as={Segment}>
+          <Sidebar
+            as={Menu}
+            animation="overlay"
+            width="thin"
+            direction="right"
+            visible={props.showSidebar}
+            icon="labeled"
+            vertical
+            inverted
+          >
+            <Menu.Item name="delete-widget" onClick={() => props.removeWidget(props.id)}>
+              <Icon name="remove" />
+              Delete Widget
+            </Menu.Item>
+            <Menu.Item name="settings" disabled>
+              <Icon name="tasks" />
+              Configs
+            </Menu.Item>
+          </Sidebar>
+          <Sidebar.Pusher>
+            <Segment basic>
+
+              <TransitComponent widgetId={props.id} />
+
+            </Segment>
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
+
       </div>
     );
   }
@@ -61,11 +106,14 @@ WidgetContainer.propTypes = {
 const mapStateToProps = (state, ownProps) => {
   const ids = state.widgets.ids;
   const id = ownProps.id;
-  return { ids, id };
+  const showSidebar = state.widgets.metadata.transit.showSidebar;//TODO - un-hardcode
+  return { ids, id, showSidebar };
 };
 
 export const mapDispatchToProps = dispatch => bindActionCreators({
   removeWidget,
+  showWidgetSidebar,
+  hideWidgetSidebar,
 },
 dispatch);
 

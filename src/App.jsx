@@ -16,6 +16,7 @@ import {
 } from './actions';
 import ModalAddWidget from './components/ModalAddWidget/index.jsx';
 import WidgetContainer from './components/WidgetContainer/index.jsx';
+import WidgetSidebar from './components/WidgetSidebar/index.jsx';
 
 const Grid = ReactGridLayout.WidthProvider(ReactGridLayout);
 
@@ -36,7 +37,7 @@ const App = (props) => {
         className="side-strip"
         onClick={props.showSidebar ? props.hideDashboardSidebar : props.showDashboardSidebar}
       >
-        <Icon name={props.showSidebar ? 'chevron right' : 'chevron left'} />
+        <Icon name={props.showSidebar ? 'chevron right' : 'ellipsis vertical'} />
       </div>
       <div className="grid-container">
         <Sidebar.Pushable as={Segment}>
@@ -50,12 +51,16 @@ const App = (props) => {
             vertical
             inverted
           >
-            <Menu.Item name="Add_Widget" onClick={props.showAddWidgetModal}>
+            <Menu.Item name="add_widget" onClick={props.showAddWidgetModal}>
               <Icon name="add circle" />
               Add Widget
             </Menu.Item>
-            <Menu.Item name="Settings" disabled>
-              <Icon name="cogs" />
+            <Menu.Item name="lock" disabled>
+              <Icon name="lock" />
+              Lock
+            </Menu.Item>
+            <Menu.Item name="settings" disabled>
+              <Icon name="setting" />
               Settings
             </Menu.Item>
           </Sidebar>
@@ -95,7 +100,8 @@ App.propTypes = {
     static: PropTypes.bool,
   })).isRequired,
   showSidebar: PropTypes.bool.isRequired,
-  showAddWidgetModal: PropTypes.func.isRequired,
+  transitShowSidebar: PropTypes.bool.isRequired,
+  showAddWidgetModal: PropTypes.func.isRequired, //TODO: correct - make metadata
   showDashboardSidebar: PropTypes.func.isRequired,
   hideDashboardSidebar: PropTypes.func.isRequired,
 };
@@ -104,7 +110,8 @@ export const mapStateToProps = (state) => {
   const ids = state.widgets.ids;
   const layout = state.widgets.grid.layout;
   const showSidebar = state.widgets.showSidebar;
-  return { ids, layout, showSidebar };
+  const transitShowSidebar = state.widgets.metadata.transit.showSidebar;
+  return { ids, layout, showSidebar, transitShowSidebar };
 };
 
 export const mapDispatchToProps = dispatch => bindActionCreators({
