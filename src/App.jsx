@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ReactGridLayout from 'react-grid-layout';
-import { Button, Icon, Sidebar, Segment, Menu, Image, Header } from 'semantic-ui-react'
+import { Button, Icon, Sidebar, Segment, Menu, Image, Header } from 'semantic-ui-react';
 import TransitComponent from '@databraid/transit-widget/lib';
 import SlackComponent from '@databraid/slack-widget/lib';
 import GithubComponent from '@databraid/github-widget/lib';
@@ -11,7 +11,7 @@ import './App.css';
 import {
   showAddWidgetModal,
   showDashboardSidebar,
-  hideDashboardSidebar
+  hideDashboardSidebar,
 } from './actions';
 import ModalAddWidget from './components/ModalAddWidget';
 
@@ -19,49 +19,45 @@ import ModalAddWidget from './components/ModalAddWidget';
 const Grid = ReactGridLayout.WidthProvider(ReactGridLayout);
 
 
-
-
 const App = (props) => {
-
-  var components = props.ids.map((component) => {
-    if(component === TRANSIT_WIDGET_ID){
+  const components = props.ids.map((component) => {
+    if (component === TRANSIT_WIDGET_ID) {
       return (
         <div key={component}>
           <TransitComponent widgetId={component} />
         </div>
-      )
+      );
     }
-    if(component === GITHUB_WIDGET_ID){
+    if (component === GITHUB_WIDGET_ID) {
       return (
         <div key={component}>
           <GithubComponent widgetId={component} />
         </div>
-      )
+      );
     }
-    if(component === SLACK_WIDGET_ID){
+    if (component === SLACK_WIDGET_ID) {
       return (
         <div key={component}>
           <SlackComponent widgetId={component} />
         </div>
-      )
+      );
     }
-
   });
 
   return (
-    <div className='container'>
+    <div className="container">
 
-      {props.showSidebar?<Button primary fluid onClick={props.hideDashboardSidebar}>Hide Sidebar</Button>:<Button primary fluid onClick={props.showDashboardSidebar}>Show Sidebar</Button>}
+      {props.showSidebar ? <Button primary fluid onClick={props.hideDashboardSidebar}>Hide Sidebar</Button> : <Button primary fluid onClick={props.showDashboardSidebar}>Show Sidebar</Button>}
 
 
       <Sidebar.Pushable as={Segment}>
-        <Sidebar as={Menu} animation='overlay' width='thin' direction='right' visible={props.showSidebar} icon='labeled' vertical inverted >
-          <Menu.Item name='Add_Widget' onClick={props.showAddWidgetModal}>
-            <Icon name='add circle' />
+        <Sidebar as={Menu} animation="overlay" width="thin" direction="right" visible={props.showSidebar} icon="labeled" vertical inverted >
+          <Menu.Item name="Add_Widget" onClick={props.showAddWidgetModal}>
+            <Icon name="add circle" />
             Add Widget
           </Menu.Item>
-          <Menu.Item name='Settings'>
-            <Icon name='cogs' />
+          <Menu.Item name="Settings">
+            <Icon name="cogs" />
             Settings
           </Menu.Item>
         </Sidebar>
@@ -87,10 +83,10 @@ const App = (props) => {
 
 
 const mapStateToProps = (state, ownProps) => {
-  const ids  = state.widgets.ids;
-  const byId  = state.widgets.byId;
+  const ids = state.widgets.ids;
+  const byId = state.widgets.byId;
   const grid = state.widgets.grid;
-  const showSidebar  = state.widgets.showSidebar;
+  const showSidebar = state.widgets.showSidebar;
   return { ids, byId, grid, showSidebar };
 };
 
@@ -104,5 +100,5 @@ dispatch);
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(App);
