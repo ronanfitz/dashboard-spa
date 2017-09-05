@@ -18,10 +18,10 @@ import WidgetContainer from './components/WidgetContainer/index.jsx';
 const Grid = ReactGridLayout.WidthProvider(ReactGridLayout);
 
 const App = (props) => {
-  const components = (props.ids).map((component) => {
+  const components = (props.ids).map((widgetId) => {
     return (
-      <div key={component} className="widget-container">
-        <WidgetContainer id={component} />
+      <div key={widgetId} className="widget-container">
+        <WidgetContainer id={widgetId} />
       </div>
     )
   });
