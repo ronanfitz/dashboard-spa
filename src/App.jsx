@@ -20,7 +20,7 @@ const Grid = ReactGridLayout.WidthProvider(ReactGridLayout);
 const App = (props) => {
   const components = (props.ids).map((component) => {
     return (
-      <div key={component}>
+      <div key={component} className="widget-container">
         <WidgetContainer id={component} />
       </div>
     )

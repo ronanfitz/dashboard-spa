@@ -38,7 +38,7 @@ const WidgetContainer = (props) => {
   }
 
   return (
-    <div className="widget-container">
+    <div className="widget">
       {props.locked ? null : <WidgetSidestrip id={props.id} />}
 
       <Sidebar.Pushable as={Segment}>
