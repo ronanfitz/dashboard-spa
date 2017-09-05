@@ -19,30 +19,30 @@ import ModalAddWidget from './components/ModalAddWidget';
 const Grid = ReactGridLayout.WidthProvider(ReactGridLayout);
 
 const App = (props) => {
-  const components = (props.ids).map((component) => {
-    if (component === TRANSIT_WIDGET_ID) {
+  const components = (props.ids).map((widgetId) => {
+    if (widgetId === TRANSIT_WIDGET_ID) {
       return (
-        <div key={component}>
-          <TransitComponent widgetId={component} />
+        <div key={widgetId}>
+          <TransitComponent widgetId={widgetId} />
         </div>
       );
     }
-    if (component === GITHUB_WIDGET_ID) {
+    if (widgetId === GITHUB_WIDGET_ID) {
       return (
-        <div key={component}>
-          <GithubComponent widgetId={component} />
+        <div key={widgetId}>
+          <GithubComponent widgetId={widgetId} />
         </div>
       );
     }
-    if (component === SLACK_WIDGET_ID) {
+    if (widgetId === SLACK_WIDGET_ID) {
       return (
-        <div key={component}>
-          <SlackComponent widgetId={component} />
+        <div key={widgetId}>
+          <SlackComponent widgetId={widgetId} />
         </div>
       );
     }
     return (
-      <div key={component} />
+      <div key={widgetId} />
     );
   });
 
