@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ReactGridLayout from 'react-grid-layout';
-import { Button, Icon, Sidebar, Segment, Menu, Image, Header } from 'semantic-ui-react';
+import { Icon, Sidebar, Segment, Menu } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 import TransitComponent from '@databraid/transit-widget/lib';
 import SlackComponent from '@databraid/slack-widget/lib';
 import GithubComponent from '@databraid/github-widget/lib';
@@ -15,12 +16,10 @@ import {
 } from './actions';
 import ModalAddWidget from './components/ModalAddWidget';
 
-
 const Grid = ReactGridLayout.WidthProvider(ReactGridLayout);
 
-
 const App = (props) => {
-  const components = props.ids.map((component) => {
+  const components = (props.ids).map((component) => {
     if (component === TRANSIT_WIDGET_ID) {
       return (
         <div key={component}>
@@ -42,52 +41,87 @@ const App = (props) => {
         </div>
       );
     }
+    return (
+      <div key={component} />
+    );
   });
 
   return (
-    <div className="container">
+    <div className="page-container">
+      <div className="grid-container">
+        <Sidebar.Pushable as={Segment}>
+          <Sidebar
+            as={Menu}
+            animation="overlay"
+            width="thin"
+            direction="right"
+            visible={props.showSidebar}
+            icon="labeled"
+            vertical
+            inverted
+          >
+            <Menu.Item name="Add_Widget" onClick={props.showAddWidgetModal}>
+              <Icon name="add circle" />
+              Add Widget
+            </Menu.Item>
+            <Menu.Item name="Settings" disabled>
+              <Icon name="cogs" />
+              Settings
+            </Menu.Item>
+          </Sidebar>
+          <Sidebar.Pusher>
+            <Segment basic>
 
-      {props.showSidebar ? <Button primary fluid onClick={props.hideDashboardSidebar}>Hide Sidebar</Button> : <Button primary fluid onClick={props.showDashboardSidebar}>Show Sidebar</Button>}
+              <Grid
+                verticalCompact={false}
+                className="layout"
+                layout={props.layout}
+                cols={12}
+                rowHeight={30}
+                width={1200}
+              >
+                {components}
+              </Grid>
 
-
-      <Sidebar.Pushable as={Segment}>
-        <Sidebar as={Menu} animation="overlay" width="thin" direction="right" visible={props.showSidebar} icon="labeled" vertical inverted >
-          <Menu.Item name="Add_Widget" onClick={props.showAddWidgetModal}>
-            <Icon name="add circle" />
-            Add Widget
-          </Menu.Item>
-          <Menu.Item name="Settings">
-            <Icon name="cogs" />
-            Settings
-          </Menu.Item>
-        </Sidebar>
-        <Sidebar.Pusher>
-          <Segment basic>
-
-
-            <Grid verticalCompact={false} className="layout" layout={props.grid.layout} cols={12} rowHeight={30} width={1200}>
-              {components}
-            </Grid>
-
-          </Segment>
-        </Sidebar.Pusher>
-      </Sidebar.Pushable>
-
+            </Segment>
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
+      </div>
+      <div
+        role="link"
+        tabIndex="-1"
+        className="sideStrip"
+        onClick={props.showSidebar ? props.hideDashboardSidebar : props.showDashboardSidebar}
+      >
+        <Icon name={props.showSidebar ? 'chevron right' : 'chevron left'} />
+      </div>
 
       <ModalAddWidget />
-
-
     </div>
   );
 };
 
+App.propTypes = {
+  ids: PropTypes.arrayOf(PropTypes.string).isRequired,
+  layout: PropTypes.arrayOf(PropTypes.shape({
+    i: PropTypes.string.isRequired,
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired,
+    w: PropTypes.number.isRequired,
+    h: PropTypes.number.isRequired,
+    static: PropTypes.bool,
+  })).isRequired,
+  showSidebar: PropTypes.bool.isRequired,
+  showAddWidgetModal: PropTypes.func.isRequired,
+  showDashboardSidebar: PropTypes.func.isRequired,
+  hideDashboardSidebar: PropTypes.func.isRequired,
+};
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   const ids = state.widgets.ids;
-  const byId = state.widgets.byId;
-  const grid = state.widgets.grid;
+  const layout = state.widgets.grid.layout;
   const showSidebar = state.widgets.showSidebar;
-  return { ids, byId, grid, showSidebar };
+  return { ids, layout, showSidebar };
 };
 
 export const mapDispatchToProps = dispatch => bindActionCreators({

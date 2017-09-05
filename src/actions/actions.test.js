@@ -10,7 +10,7 @@ describe('actions', () => {
       id: TYPES.TRANSIT_WIDGET_ID,
     };
 
-    expect(actions.addTransitWidget()).toEqual(expectedAction);
+    expect(actions.addWidget(TYPES.TRANSIT_WIDGET_ID)).toEqual(expectedAction);
   });
   it('should create an action to add a slack widget', () => {
     const expectedAction = {
@@ -18,7 +18,7 @@ describe('actions', () => {
       id: TYPES.SLACK_WIDGET_ID,
     };
 
-    expect(actions.addSlackWidget()).toEqual(expectedAction);
+    expect(actions.addWidget(TYPES.SLACK_WIDGET_ID)).toEqual(expectedAction);
   });
   it('should create an action to add a github widget', () => {
     const expectedAction = {
@@ -26,7 +26,7 @@ describe('actions', () => {
       id: TYPES.GITHUB_WIDGET_ID,
     };
 
-    expect(actions.addGithubWidget()).toEqual(expectedAction);
+    expect(actions.addWidget(TYPES.GITHUB_WIDGET_ID)).toEqual(expectedAction);
   });
   it('should create an action to show widget modal', () => {
     const expectedAction = {
