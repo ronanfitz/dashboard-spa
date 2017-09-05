@@ -1,7 +1,13 @@
 import { combineReducers } from 'redux';
+<<<<<<< HEAD
 import { transit as transitReducer } from '@databraid/transit-widget/lib/reducers';
 import { github as githubReducer } from '@databraid/github-widget/lib/reducers';
 import { storeReducer as slackReducer } from '@databraid/slack-widget/lib/Reducers';
+=======
+import { rootReducer as transitReducer } from '@databraid/transit-widget/lib';
+import { rootReducer as githubReducer } from '@databraid/github-widget/lib';
+import { rootReducer as slackReducer } from '@databraid/slack-widget/lib';
+>>>>>>> Slack refactor: exporting reducer (#15)
 // remove eslint exception when slack widget is implemented
 /* eslint-disable no-unused-vars  */
 
@@ -25,7 +31,7 @@ import {
 } from '../constants';
 
 const initialState = {
-  ids: [],
+  ids: [TRANSIT_WIDGET_ID, GITHUB_WIDGET_ID, SLACK_WIDGET_ID],
   byId: {},
   showSidebar: false,
   showAddWidgetModal: false,
