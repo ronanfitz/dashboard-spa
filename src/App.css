@@ -21,7 +21,13 @@
 
 .widget-container {
   height: 100%;
-  width: 98%;
+
+}
+
+.widget {
+  height: 100%;
+  width: 100%;
+  float: left;
 }
 
 .side-strip {
