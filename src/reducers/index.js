@@ -71,6 +71,10 @@ const widgets = (state = initialState, action) => {
           },
         };
       }
+      return {
+        ...state,
+        showAddWidgetModal: false,
+      };
 
     case SHOW_ADD_WIDGET_MODAL:
       return {
@@ -112,5 +116,3 @@ const widgets = (state = initialState, action) => {
 const rootReducer = combineReducers({
   widgets,
 });
-
-export default rootReducer;
