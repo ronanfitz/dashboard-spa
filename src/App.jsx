@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactGridLayout from 'react-grid-layout';
 import TransitComponent from '@databraid/transit-widget/lib';
-import SlackComponent from '@databraid/slack-widget/lib';
+import SlackComponent from '@databraid/slack-widget/lib/App';
 import GithubComponent from '@databraid/github-widget/lib';
 import { TRANSIT_WIDGET_ID, SLACK_WIDGET_ID, GITHUB_WIDGET_ID } from './constants';
 import './App.css';
