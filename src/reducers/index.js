@@ -38,6 +38,7 @@ const initialState = {
 };
 
 const widgets = (state = initialState, action) => {
+
   switch (action.type) {
     case ADD_WIDGET:
 
@@ -224,6 +225,7 @@ const widgets = (state = initialState, action) => {
       };
   }
 };
+
 
 const rootReducer = combineReducers({
   widgets,
