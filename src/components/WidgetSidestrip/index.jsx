@@ -8,22 +8,30 @@ import {
   hideWidgetSidebar,
 } from '../../actions';
 
-const WidgetSidestrip = (props) => {
-  return (
-    <div
-      className="side-strip"
-      onClick={props.showSidebar ? () => props.hideWidgetSidebar(props.id) : () => props.showWidgetSidebar(props.id)}
-    >
-      <Icon
-        className="close-widget"
-        name={props.showSidebar ? 'chevron right' : 'ellipsis vertical'}
-      />
-    </div>
-  );
-}
+const WidgetSidestrip = props => (
+  <div
+    role="button"
+    tabIndex="-1"
+    className="side-strip"
+    onClick={
+      props.showSidebar ?
+        () => props.hideWidgetSidebar(props.id) :
+        () => props.showWidgetSidebar(props.id)
+    }
+  >
+    <Icon
+      className="close-widget"
+      name={props.showSidebar ? 'chevron right' : 'ellipsis vertical'}
+    />
+  </div>
+);
+
 
 WidgetSidestrip.propTypes = {
   id: PropTypes.string.isRequired,
+  showSidebar: PropTypes.bool.isRequired,
+  showWidgetSidebar: PropTypes.func.isRequired,
+  hideWidgetSidebar: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {
