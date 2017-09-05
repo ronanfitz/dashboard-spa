@@ -72,12 +72,6 @@ const widgets = (state = initialState, action) => {
         };
       }
 
-      return {
-        ...state,
-        showAddWidgetModal: false,
-      };
-
-
     case SHOW_ADD_WIDGET_MODAL:
       return {
         ...state,
