@@ -38,10 +38,8 @@ const initialState = {
 };
 
 const widgets = (state = initialState, action) => {
-
   switch (action.type) {
     case ADD_WIDGET:
-
       if (action.id === TRANSIT_WIDGET_ID && !state.ids.includes(TRANSIT_WIDGET_ID)) {
         return {
           ...state,
@@ -51,7 +49,7 @@ const widgets = (state = initialState, action) => {
             ...state.grid,
             layout: [
               ...state.grid.layout,
-              { i: TRANSIT_WIDGET_ID, x: 0, y: 0, w: 6, h: 8, static: false, },
+              { i: TRANSIT_WIDGET_ID, x: 0, y: 0, w: 6, h: 8, static: false },
             ],
           },
           metadata: {
@@ -63,7 +61,7 @@ const widgets = (state = initialState, action) => {
               minWidth: 4,
               minHeight: 4,
               showSidebar: false,
-            }
+            },
           },
         };
       } else if (action.id === GITHUB_WIDGET_ID && !state.ids.includes(GITHUB_WIDGET_ID)) {
@@ -75,7 +73,7 @@ const widgets = (state = initialState, action) => {
             ...state.grid,
             layout: [
               ...state.grid.layout,
-              { i: GITHUB_WIDGET_ID, x: 6, y: 0, w: 6, h: 8, static: false, },
+              { i: GITHUB_WIDGET_ID, x: 6, y: 0, w: 6, h: 8, static: false },
             ],
           },
           metadata: {
@@ -87,7 +85,7 @@ const widgets = (state = initialState, action) => {
               minWidth: 4,
               minHeight: 4,
               showSidebar: false,
-            }
+            },
           },
         };
       } else if (action.id === SLACK_WIDGET_ID && !state.ids.includes(SLACK_WIDGET_ID)) {
@@ -99,7 +97,7 @@ const widgets = (state = initialState, action) => {
             ...state.grid,
             layout: [
               ...state.grid.layout,
-              { i: SLACK_WIDGET_ID, x: 0, y: 8, w: 6, h: 6, static: false, },
+              { i: SLACK_WIDGET_ID, x: 0, y: 8, w: 6, h: 6, static: false },
             ],
           },
           metadata: {
@@ -111,7 +109,7 @@ const widgets = (state = initialState, action) => {
               minWidth: 4,
               minHeight: 4,
               showSidebar: false,
-            }
+            },
           },
         };
       }
@@ -120,19 +118,19 @@ const widgets = (state = initialState, action) => {
         showAddWidgetModal: false,
       };
 
-    case REMOVE_WIDGET:
-      var newIds = [...state.ids];
+    case REMOVE_WIDGET: {
+      const newIds = [...state.ids];
       const removeIndex = newIds.indexOf(action.id);
 
-      if(removeIndex > -1){
+      if (removeIndex > -1) {
         newIds.splice(removeIndex, 1);
       }
 
       return {
         ...state,
-        ids: newIds
+        ids: newIds,
       };
-
+    }
     case SHOW_ADD_WIDGET_MODAL:
       return {
         ...state,
@@ -165,9 +163,9 @@ const widgets = (state = initialState, action) => {
           ...state.metadata,
           [action.id]: {
             ...state.metadata[action.id],
-            showSidebar: true
-          }
-        }
+            showSidebar: true,
+          },
+        },
       };
 
     case HIDE_WIDGET_SIDEBAR:
@@ -177,9 +175,9 @@ const widgets = (state = initialState, action) => {
           ...state.metadata,
           [action.id]: {
             ...state.metadata[action.id],
-            showSidebar: false
-          }
-        }
+            showSidebar: false,
+          },
+        },
       };
 
     case LOCK_DASHBOARD:
@@ -189,14 +187,14 @@ const widgets = (state = initialState, action) => {
         locked: true,
         grid: {
           ...state.grid,
-          layout: state.grid.layout.map( layoutObj => {
-            return {
+          layout: state.grid.layout.map(layoutObj => (
+            {
               ...layoutObj,
-              static: true
+              static: true,
             }
-          })
-        }
-      }
+          )),
+        },
+      };
 
     case UNLOCK_DASHBOARD:
       return {
@@ -205,14 +203,14 @@ const widgets = (state = initialState, action) => {
         locked: false,
         grid: {
           ...state.grid,
-          layout: state.grid.layout.map( layoutObj => {
-            return {
+          layout: state.grid.layout.map(layoutObj => (
+            {
               ...layoutObj,
-              static: false
+              static: false,
             }
-          })
-        }
-      }
+          )),
+        },
+      };
 
     default:
       return {

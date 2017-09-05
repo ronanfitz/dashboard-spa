@@ -12,19 +12,17 @@ import {
   lockDashboard,
   unlockDashboard,
 } from './actions';
-import ModalAddWidget from './components/ModalAddWidget/index.jsx';
-import WidgetContainer from './components/WidgetContainer/index.jsx';
+import ModalAddWidget from './components/ModalAddWidget/';
+import WidgetContainer from './components/WidgetContainer/';
 
 const Grid = ReactGridLayout.WidthProvider(ReactGridLayout);
 
 const App = (props) => {
-  const components = (props.ids).map((widgetId) => {
-    return (
-      <div key={widgetId} className="widget-container">
-        <WidgetContainer id={widgetId} />
-      </div>
-    )
-  });
+  const components = (props.ids).map(widgetId => (
+    <div key={widgetId} className="widget-container">
+      <WidgetContainer id={widgetId} />
+    </div>
+  ));
 
   return (
     <div className="page-container">
@@ -52,11 +50,15 @@ const App = (props) => {
               <Icon name="add circle" />
               Add Widget
             </Menu.Item>
-            {props.ids.length ? <Menu.Item name="lock-unlock-dashboard" onClick={props.locked ? props.unlockDashboard : props.lockDashboard} >
-              <Icon name={props.locked ? "unlock" : "lock"} />
-              {props.locked ? "Unlock" : "Lock"}
-            </Menu.Item>
-            : null }
+            {props.ids.length ?
+              <Menu.Item
+                name="lock-unlock-dashboard"
+                onClick={props.locked ? props.unlockDashboard : props.lockDashboard}
+              >
+                <Icon name={props.locked ? 'unlock' : 'lock'} />
+                {props.locked ? 'Unlock' : 'Lock'}
+              </Menu.Item>
+              : null }
             <Menu.Item name="settings" disabled>
               <Icon name="setting" />
               Settings
@@ -98,9 +100,12 @@ App.propTypes = {
     static: PropTypes.bool,
   })).isRequired,
   showSidebar: PropTypes.bool.isRequired,
+  locked: PropTypes.bool.isRequired,
   showAddWidgetModal: PropTypes.func.isRequired,
   showDashboardSidebar: PropTypes.func.isRequired,
   hideDashboardSidebar: PropTypes.func.isRequired,
+  lockDashboard: PropTypes.func.isRequired,
+  unlockDashboard: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {

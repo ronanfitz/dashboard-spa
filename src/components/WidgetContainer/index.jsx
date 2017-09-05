@@ -3,7 +3,7 @@ import {
   Icon,
   Sidebar,
   Segment,
-  Menu
+  Menu,
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -21,20 +21,17 @@ import {
   showWidgetSidebar,
   hideWidgetSidebar,
 } from '../../actions';
-import WidgetSidestrip from '../WidgetSidestrip/index.jsx';
+import WidgetSidestrip from '../WidgetSidestrip/';
 
 
 const WidgetContainer = (props) => {
-
-  var component;
+  let component;
   if (props.id === TRANSIT_WIDGET_ID) {
-    component = <TransitComponent widgetId={props.id} />
-  }
-  else if (props.id === GITHUB_WIDGET_ID){
-    component = <GithubComponent widgetId={props.id} />
-  }
-  else if (props.id === SLACK_WIDGET_ID){
-    component = <SlackComponent widgetId={props.id} />
+    component = <TransitComponent widgetId={props.id} />;
+  } else if (props.id === GITHUB_WIDGET_ID) {
+    component = <GithubComponent widgetId={props.id} />;
+  } else if (props.id === SLACK_WIDGET_ID) {
+    component = <SlackComponent widgetId={props.id} />;
   }
 
   return (
@@ -69,10 +66,9 @@ const WidgetContainer = (props) => {
       </Sidebar.Pushable>
     </div>
   );
-}
+};
 
 WidgetContainer.propTypes = {
-  ids: PropTypes.arrayOf(PropTypes.string).isRequired,
   id: PropTypes.string.isRequired,
   showSidebar: PropTypes.bool.isRequired,
   locked: PropTypes.bool.isRequired,
@@ -80,11 +76,10 @@ WidgetContainer.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const ids = state.widgets.ids;
   const id = ownProps.id;
   const showSidebar = state.widgets.metadata[ownProps.id].showSidebar;
   const locked = state.widgets.locked;
-  return { ids, id, showSidebar, locked };
+  return { id, showSidebar, locked };
 };
 
 export const mapDispatchToProps = dispatch => bindActionCreators({
