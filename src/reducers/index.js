@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { rootReducer as transitReducer } from '@databraid/transit-widget/lib';
 import { rootReducer as githubReducer } from '@databraid/github-widget/lib';
+import { rootReducer as slackReducer } from '@databraid/slack-widget/lib';
 // remove eslint exception when slack widget is implemented
 /* eslint-disable no-unused-vars  */
 import {
@@ -23,7 +24,7 @@ import {
 } from '../constants';
 
 const initialState = {
-  ids: [],
+  ids: [TRANSIT_WIDGET_ID, GITHUB_WIDGET_ID, SLACK_WIDGET_ID],
   byId: {},
   showSidebar: false,
   showAddWidgetModal: false,
@@ -37,6 +38,7 @@ const initialState = {
   metadata: {},
 };
 
+<<<<<<< HEAD
 const widgets = (state = initialState, action) => {
   switch (action.type) {
     case ADD_WIDGET:
@@ -226,7 +228,17 @@ const widgets = (state = initialState, action) => {
 
 
 const rootReducer = combineReducers({
-  widgets,
+=======
+const widgets = (state = initialState, action) => ({
+  ...state,
+  byId: {
+    [TRANSIT_WIDGET_ID]: transitReducer(state.byId[TRANSIT_WIDGET_ID], action),
+    [GITHUB_WIDGET_ID]: githubReducer(state.byId[GITHUB_WIDGET_ID], action),
+    [SLACK_WIDGET_ID]: slackReducer(state.byId[SLACK_WIDGET_ID], action),
+  },
 });
 
-export default rootReducer;
+export default combineReducers({
+>>>>>>> 663311781cf149309b66a65ebace11b9412f7687
+  widgets,
+});
