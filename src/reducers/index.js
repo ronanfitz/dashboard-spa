@@ -38,7 +38,6 @@ const initialState = {
   metadata: {},
 };
 
-<<<<<<< HEAD
 const widgets = (state = initialState, action) => {
   switch (action.type) {
     case ADD_WIDGET:
@@ -228,17 +227,5 @@ const widgets = (state = initialState, action) => {
 
 
 const rootReducer = combineReducers({
-=======
-const widgets = (state = initialState, action) => ({
-  ...state,
-  byId: {
-    [TRANSIT_WIDGET_ID]: transitReducer(state.byId[TRANSIT_WIDGET_ID], action),
-    [GITHUB_WIDGET_ID]: githubReducer(state.byId[GITHUB_WIDGET_ID], action),
-    [SLACK_WIDGET_ID]: slackReducer(state.byId[SLACK_WIDGET_ID], action),
-  },
-});
-
-export default combineReducers({
->>>>>>> 663311781cf149309b66a65ebace11b9412f7687
   widgets,
 });

@@ -34,7 +34,6 @@ export function showDashboardSidebar() {
 export function hideDashboardSidebar() {
   return { type: HIDE_DASHBOARD_SIDEBAR };
 }
-<<<<<<< HEAD
 
 export function showWidgetSidebar(widgetId) {
   return { type: SHOW_WIDGET_SIDEBAR, id: widgetId };
@@ -52,5 +51,3 @@ export function unlockDashboard() {
   return { type: UNLOCK_DASHBOARD };
 }
 
-=======
->>>>>>> 663311781cf149309b66a65ebace11b9412f7687

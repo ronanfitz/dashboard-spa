@@ -4,13 +4,6 @@ import { bindActionCreators } from 'redux';
 import ReactGridLayout from 'react-grid-layout';
 import { Icon, Sidebar, Segment, Menu } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-<<<<<<< HEAD
-=======
-import TransitComponent from '@databraid/transit-widget/lib';
-import SlackComponent from '@databraid/slack-widget/lib/App';
-import GithubComponent from '@databraid/github-widget/lib';
-import { TRANSIT_WIDGET_ID, SLACK_WIDGET_ID, GITHUB_WIDGET_ID } from './constants';
->>>>>>> 663311781cf149309b66a65ebace11b9412f7687
 import './App.css';
 import {
   showAddWidgetModal,
@@ -25,40 +18,11 @@ import WidgetContainer from './components/WidgetContainer/';
 const Grid = ReactGridLayout.WidthProvider(ReactGridLayout);
 
 const App = (props) => {
-<<<<<<< HEAD
   const components = (props.ids).map(widgetId => (
     <div key={widgetId} className="widget-container">
       <WidgetContainer id={widgetId} />
     </div>
   ));
-=======
-  const components = (props.ids).map((widgetId) => {
-    if (widgetId === TRANSIT_WIDGET_ID) {
-      return (
-        <div key={widgetId}>
-          <TransitComponent widgetId={widgetId} />
-        </div>
-      );
-    }
-    if (widgetId === GITHUB_WIDGET_ID) {
-      return (
-        <div key={widgetId}>
-          <GithubComponent widgetId={widgetId} />
-        </div>
-      );
-    }
-    if (widgetId === SLACK_WIDGET_ID) {
-      return (
-        <div key={widgetId}>
-          <SlackComponent widgetId={widgetId} />
-        </div>
-      );
-    }
-    return (
-      <div key={widgetId} />
-    );
-  });
->>>>>>> 663311781cf149309b66a65ebace11b9412f7687
 
   return (
     <div className="page-container">
