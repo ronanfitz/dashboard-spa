@@ -219,6 +219,7 @@ const widgets = (state = initialState, action) => {
         byId: {
           [TRANSIT_WIDGET_ID]: transitReducer(state.byId[TRANSIT_WIDGET_ID], action),
           [GITHUB_WIDGET_ID]: githubReducer(state.byId[GITHUB_WIDGET_ID], action),
+          [SLACK_WIDGET_ID]: slackReducer(state.byId[SLACK_WIDGET_ID], action),
         },
         showSidebar: state.ids.length === 0,
       };
