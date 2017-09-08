@@ -1,4 +1,4 @@
-#root {
+#dashboard-root {
   height: 100%;
   padding: 0px;
   margin: 0px;
@@ -39,10 +39,6 @@
   background-color: #1c1c1c;
   color: #999;
   cursor: pointer;
-}
-
-.page-container>.side-strip {
-  width: 22px;
 }
 
 .side-strip:focus {
@@ -106,7 +102,10 @@ body {
   background: white;
   padding: 0px;
   overflow: scroll;
+  margin: 0% !important;
+  padding: 0 !important;
 }
+
 #content {
   width: 100%;
 }
