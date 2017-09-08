@@ -8,9 +8,9 @@ import {
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import TransitComponent from '@databraid/transit-widget/lib';
-import SlackComponent from '@databraid/slack-widget/lib';
-import GithubComponent from '@databraid/github-widget/lib';
+import TransitComponent from '@databraid/transit-widget/lib/App';
+import SlackComponent from '@databraid/slack-widget/lib/App';
+import GithubComponent from '@databraid/github-widget/lib/App';
 import {
   TRANSIT_WIDGET_ID,
   SLACK_WIDGET_ID,
