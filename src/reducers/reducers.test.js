@@ -1,10 +1,18 @@
 import { Reducer } from 'redux-testkit';
-import rootReducer from './index';
+import { transit as transitReducer } from '@databraid/transit-widget/lib/reducers';
+import { github as githubReducer } from '@databraid/github-widget/lib/reducers';
+import { storeReducer as slackReducer } from '@databraid/slack-widget/lib/Reducers';
+import { widgets as rootReducer } from './index';
+import {
+  TRANSIT_WIDGET_ID,
+  SLACK_WIDGET_ID,
+  GITHUB_WIDGET_ID,
+} from '../constants';
 
 const initialState = {
   ids: [],
   byId: {},
-  showSidebar: false,
+  showSidebar: true,
   showAddWidgetModal: false,
   grid: {
     nextId: 1,
@@ -16,11 +24,29 @@ const initialState = {
 
 describe('rootReducer', () => {
   it('should have initial state', () => {
-    expect(rootReducer).toEqual(initialState);
+    expect(rootReducer(initialState, {}))
+      .toEqual({
+        ...initialState,
+        byId: {
+          [TRANSIT_WIDGET_ID]: transitReducer(undefined, {}),
+          [GITHUB_WIDGET_ID]: githubReducer(undefined, {}),
+          [SLACK_WIDGET_ID]: slackReducer(undefined, {}),
+        },
+      });
   });
 
   it('should not affect state', () => {
-    Reducer(rootReducer).withState(initialState).expect({ type: 'NOT_EXISTING' }).toReturnState(initialState);
+    Reducer(rootReducer)
+      .withState(initialState)
+      .expect({ type: 'NOT_EXISTING' })
+      .toReturnState({
+        ...initialState,
+        byId: {
+          [TRANSIT_WIDGET_ID]: transitReducer(undefined, {}),
+          [GITHUB_WIDGET_ID]: githubReducer(undefined, {}),
+          [SLACK_WIDGET_ID]: slackReducer(undefined, {}),
+        },
+      });
   });
 
   it('should add a widget to the dashboard', () => {
@@ -35,7 +61,7 @@ describe('rootReducer', () => {
           ...initialState.grid.layout,
           { i: TRANSIT_WIDGET_ID, x: 0, y: 0, w: 6, h: 8 },
         ],
-      }
+      },
     });
   });
 
