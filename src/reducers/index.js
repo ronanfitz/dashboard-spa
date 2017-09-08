@@ -17,7 +17,7 @@ import {
 } from '../constants';
 
 const initialState = {
-  ids: [TRANSIT_WIDGET_ID, GITHUB_WIDGET_ID, SLACK_WIDGET_ID],
+  ids: [],
   byId: {},
   showSidebar: false,
   showAddWidgetModal: false,
@@ -117,6 +117,8 @@ const widgets = (state = initialState, action) => {
   }
 };
 
-export default combineReducers({
+const rootReducer = combineReducers({
   widgets,
 });
+
+export default rootReducer;

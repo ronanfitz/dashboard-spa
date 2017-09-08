@@ -5,7 +5,6 @@ import GITHUB_API from '@databraid/github-widget/lib/utils/Api';
 import SLACK_API from '@databraid/slack-widget/lib/Utils/Api';
 import rootReducer from './reducers';
 
-
 /* eslint-disable no-underscore-dangle */
 const store = createStore(
   rootReducer,
