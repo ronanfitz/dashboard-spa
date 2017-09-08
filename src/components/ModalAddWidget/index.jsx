@@ -9,9 +9,7 @@ import {
   GITHUB_WIDGET_ID,
 } from '../../constants';
 import {
-  addTransitWidget,
-  addGithubWidget,
-  addSlackWidget,
+  addWidget,
   hideAddWidgetModal,
 } from '../../actions';
 
@@ -25,7 +23,7 @@ const ModalAddWidget = props => (
       <Button
         basic
         color="blue"
-        onClick={props.addTransitWidget}
+        onClick={() => props.addWidget(TRANSIT_WIDGET_ID)}
         inverted
         disabled={props.ids.includes(TRANSIT_WIDGET_ID)}
       >
@@ -34,7 +32,7 @@ const ModalAddWidget = props => (
       <Button
         basic
         color="blue"
-        onClick={props.addGithubWidget}
+        onClick={() => props.addWidget(GITHUB_WIDGET_ID)}
         inverted
         disabled={props.ids.includes(GITHUB_WIDGET_ID)}
       >
@@ -43,7 +41,7 @@ const ModalAddWidget = props => (
       <Button
         basic
         color="blue"
-        onClick={props.addSlackWidget}
+        onClick={() => props.addWidget(SLACK_WIDGET_ID)}
         inverted
         disabled={props.ids.includes(SLACK_WIDGET_ID)}
       >
@@ -64,9 +62,7 @@ const ModalAddWidget = props => (
 ModalAddWidget.propTypes = {
   showAddWidgetModal: PropTypes.bool.isRequired,
   ids: PropTypes.arrayOf(PropTypes.string).isRequired,
-  addTransitWidget: PropTypes.func.isRequired,
-  addGithubWidget: PropTypes.func.isRequired,
-  addSlackWidget: PropTypes.func.isRequired,
+  addWidget: PropTypes.func.isRequired,
   hideAddWidgetModal: PropTypes.func.isRequired,
 };
 
@@ -77,9 +73,7 @@ const mapStateToProps = (state) => {
 };
 
 export const mapDispatchToProps = dispatch => bindActionCreators({
-  addTransitWidget,
-  addGithubWidget,
-  addSlackWidget,
+  addWidget,
   hideAddWidgetModal,
 },
 dispatch);
