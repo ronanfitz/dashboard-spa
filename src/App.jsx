@@ -18,7 +18,7 @@ import ModalAddWidget from './components/ModalAddWidget';
 
 const Grid = ReactGridLayout.WidthProvider(ReactGridLayout);
 
-const App = (props) => {
+export const App = (props) => {
   const components = (props.ids).map((widgetId) => {
     if (widgetId === TRANSIT_WIDGET_ID) {
       return (
@@ -117,7 +117,7 @@ App.propTypes = {
   hideDashboardSidebar: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   const ids = state.widgets.ids;
   const layout = state.widgets.grid.layout;
   const showSidebar = state.widgets.showSidebar;
