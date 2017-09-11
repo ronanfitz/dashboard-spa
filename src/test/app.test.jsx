@@ -1,6 +1,7 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
 import { shallow } from 'enzyme';
+/* eslint-disable import/extensions */
 import { App, mapStateToProps, mapDispatchToProps } from '../App.jsx';
 
 const state = {
@@ -8,11 +9,11 @@ const state = {
     ids: ['github'],
     showSidebar: true,
     grid: {
-      layout: [{ i: 'slack', x: 0, y: 8, w: 6, h: 8, static: true }]
-    }
-  }
+      layout: [{ i: 'slack', x: 0, y: 8, w: 6, h: 8, static: true }],
+    },
+  },
 };
-
+/* eslint-disable react/jsx-boolean-value */
 describe('App component', () => {
   it('should render the App component with props as specified ', () => {
     const showAddWidgetModal = jest.fn();
@@ -25,7 +26,7 @@ describe('App component', () => {
         hideDashboardSidebar={hideDashboardSidebar}
         ids={['github']}
         showSidebar={true}
-        layout={ [{ i: 'slack', x: 0, y: 8, w: 6, h: 8, static: true }] }
+        layout={[{ i: 'slack', x: 0, y: 8, w: 6, h: 8, static: true }]}
       />,
     );
     expect(toJson(component)).toMatchSnapshot();
@@ -35,7 +36,7 @@ describe('App component', () => {
     const expected = {
       ids: ['github'],
       showSidebar: true,
-      layout: [ { i: 'slack', x: 0, y: 8, w: 6, h: 8, static: true } ]
+      layout: [{ i: 'slack', x: 0, y: 8, w: 6, h: 8, static: true }],
     };
     expect(mapStateToProps(state)).toEqual(expected);
   });
@@ -44,7 +45,7 @@ describe('App component', () => {
     const dispatch = jest.fn();
     expect(mapDispatchToProps(dispatch)).toHaveProperty('showAddWidgetModal');
     expect(mapDispatchToProps(dispatch)).toHaveProperty('showDashboardSidebar');
-    expect(mapDispatchToProps(dispatch)).toHaveProperty('hideDashboardSidebar')
+    expect(mapDispatchToProps(dispatch)).toHaveProperty('hideDashboardSidebar');
   });
 
   it('Should have className page-container', () => {
@@ -58,7 +59,7 @@ describe('App component', () => {
         hideDashboardSidebar={hideDashboardSidebar}
         ids={['github']}
         showSidebar={true}
-        layout={ [{ i: 'slack', x: 0, y: 8, w: 6, h: 8, static: true }] }
+        layout={[{ i: 'slack', x: 0, y: 8, w: 6, h: 8, static: true }]}
       />,
     );
     expect(component.find('.page-container').exists()).toBe(true);

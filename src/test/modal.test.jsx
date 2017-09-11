@@ -6,10 +6,11 @@ import { ModalAddWidget, mapStateToProps, mapDispatchToProps } from '../componen
 const state = {
   widgets: {
     showAddWidgetModal: true,
-    ids: ['slack']
-  }
+    ids: ['slack'],
+  },
 };
 
+/* eslint-disable react/jsx-boolean-value */
 describe('ModalAddWidget component', () => {
   it('should render a component with props as specified ', () => {
     const addWidget = jest.fn();
@@ -23,12 +24,12 @@ describe('ModalAddWidget component', () => {
       />,
     );
     expect(toJson(component)).toMatchSnapshot();
-    });
+  });
 
-  it ('maps given state to props ', () => {
+  it('maps given state to props ', () => {
     const expected = {
       showAddWidgetModal: true,
-      ids: ['slack']
+      ids: ['slack'],
     };
     expect(mapStateToProps(state)).toEqual(expected);
   });

@@ -14,6 +14,7 @@ import {
   showDashboardSidebar,
   hideDashboardSidebar,
 } from './actions';
+/* eslint-disable import/no-named-as-default */
 import ModalAddWidget from './components/ModalAddWidget';
 
 const Grid = ReactGridLayout.WidthProvider(ReactGridLayout);

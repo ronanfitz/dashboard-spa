@@ -7,7 +7,6 @@ import App from './App';
 import store from './store';
 
 /* eslint-disable react/jsx-filename-extension */
-
 const Root = (
   <Provider store={store}>
     <App />
