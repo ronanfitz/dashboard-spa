@@ -22,6 +22,81 @@ const initialState = {
   },
 };
 
+const stateWithTransit = {
+  byId: {},
+  showSidebar: true,
+  ids: [TRANSIT_WIDGET_ID],
+  showAddWidgetModal: false,
+  grid: {
+    nextId: 1,
+    layout: [
+      { i: TRANSIT_WIDGET_ID, x: 0, y: 0, w: 6, h: 8, static: false },
+    ],
+    breakpoints: { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 },
+    cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
+  },
+  metadata: {
+    ['transit']: {
+      type: 'transit',
+      standardWidth: 6,
+      standardHeight: 8,
+      minWidth: 4,
+      minHeight: 4,
+      showSidebar: false,
+    },
+  },
+};
+
+const stateWithGithub = {
+  byId: {},
+  showSidebar: true,
+  ids: [GITHUB_WIDGET_ID],
+  showAddWidgetModal: false,
+  grid: {
+    nextId: 1,
+    layout: [
+      { i: GITHUB_WIDGET_ID, x: 6, y: 0, w: 6, h: 8, static: false },
+    ],
+    breakpoints: { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 },
+    cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
+  },
+  metadata: {
+    ['github']: {
+      type: 'github',
+      standardWidth: 6,
+      standardHeight: 8,
+      minWidth: 4,
+      minHeight: 4,
+      showSidebar: false,
+    },
+  },
+};
+
+const stateWithSlack = {
+  byId: {},
+  showSidebar: true,
+  ids: [SLACK_WIDGET_ID],
+  showAddWidgetModal: false,
+  grid: {
+    nextId: 1,
+    layout: [
+      { i: SLACK_WIDGET_ID, x: 0, y: 8, w: 6, h: 6, static: false },
+    ],
+    breakpoints: { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 },
+    cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
+  },
+  metadata: {
+    ['slack']: {
+      type: 'slack',
+      standardWidth: 6,
+      standardHeight: 6,
+      minWidth: 4,
+      minHeight: 4,
+      showSidebar: false,
+    },
+  },
+};
+
 describe('rootReducer', () => {
   it('should have initial state', () => {
     expect(rootReducer(initialState, {}))
@@ -49,30 +124,48 @@ describe('rootReducer', () => {
       });
   });
 
-  it('should add a widget to the dashboard', () => {
+  it('should add the transit widget to the dashboard', () => {
     const action = { type: 'ADD_WIDGET', id: 'transit' };
     Reducer(rootReducer).withState(initialState).expect(action).toReturnState({
-      ...initialState,
-      ids: [...initialState.ids, TRANSIT_WIDGET_ID],
-      showAddWidgetModal: false,
-      grid: {
-        ...initialState.grid,
-        layout: [
-          ...initialState.grid.layout,
-          { i: TRANSIT_WIDGET_ID, x: 0, y: 0, w: 6, h: 8, static: false },
-        ],
-      },
-      metadata: {
-        ...initialState.metadata,
-        [action.id]: {
-          type: 'transit',
-          standardWidth: 6,
-          standardHeight: 8,
-          minWidth: 4,
-          minHeight: 4,
-          showSidebar: false,
-        },
-      },
+      ...stateWithTransit
+    });
+  });
+
+  it('should add the github widget to the dashboard', () => {
+    const action = { type: 'ADD_WIDGET', id: 'github' };
+    Reducer(rootReducer).withState(initialState).expect(action).toReturnState({
+      ...stateWithGithub
+    });
+  });
+
+  it('should add the slack widget to the dashboard', () => {
+    const action = { type: 'ADD_WIDGET', id: 'slack' };
+    Reducer(rootReducer).withState(initialState).expect(action).toReturnState({
+      ...stateWithSlack
+    });
+  });
+
+  it('should remove the transit widget from the dashboard', () => {
+    const action = { type: 'REMOVE_WIDGET', id: 'transit' };
+    Reducer(rootReducer).withState(stateWithTransit).expect(action).toReturnState({
+      ...stateWithTransit,
+      ids: []
+    });
+  });
+
+  it('should remove the github widget from the dashboard', () => {
+    const action = { type: 'REMOVE_WIDGET', id: 'github' };
+    Reducer(rootReducer).withState(stateWithGithub).expect(action).toReturnState({
+      ...stateWithGithub,
+      ids: []
+    });
+  });
+
+  it('should remove the slack widget from the dashboard', () => {
+    const action = { type: 'REMOVE_WIDGET', id: 'slack' };
+    Reducer(rootReducer).withState(stateWithSlack).expect(action).toReturnState({
+      ...stateWithSlack,
+      ids: []
     });
   });
 
@@ -108,4 +201,160 @@ describe('rootReducer', () => {
       showSidebar: false,
     });
   });
+
+  it('should show transit widget sidebar', () => {
+    const action = { type: 'SHOW_WIDGET_SIDEBAR', id: 'transit' };
+    Reducer(rootReducer).withState(stateWithTransit).expect(action).toReturnState({
+      ...stateWithTransit,
+      metadata: {
+        ...stateWithTransit.metadata,
+        [action.id]: {
+          ...stateWithTransit.metadata[action.id],
+          showSidebar: true,
+        },
+      },
+    });
+  });
+
+  it('should show github widget sidebar', () => {
+    const action = { type: 'SHOW_WIDGET_SIDEBAR', id: 'github' };
+    Reducer(rootReducer).withState(stateWithGithub).expect(action).toReturnState({
+      ...stateWithGithub,
+      metadata: {
+        ...stateWithGithub.metadata,
+        [action.id]: {
+          ...stateWithGithub.metadata[action.id],
+          showSidebar: true,
+        },
+      },
+    });
+  });
+
+  it('should show slack widget sidebar', () => {
+    const action = { type: 'SHOW_WIDGET_SIDEBAR', id: 'slack' };
+    Reducer(rootReducer).withState(stateWithSlack).expect(action).toReturnState({
+      ...stateWithSlack,
+      metadata: {
+        ...stateWithSlack.metadata,
+        [action.id]: {
+          ...stateWithSlack.metadata[action.id],
+          showSidebar: true,
+        },
+      },
+    });
+  });
+
+  it('should hide transit widget sidebar', () => {
+    const action = { type: 'HIDE_WIDGET_SIDEBAR', id: 'transit' };
+    const state = {
+      ...stateWithTransit,
+      metadata: {
+        ...stateWithTransit.metadata,
+        ['transit']: {
+          ...stateWithTransit.metadata['transit'],
+          showSidebar: true,
+        },
+      },
+    }
+    Reducer(rootReducer).withState(state).expect(action).toReturnState({
+      ...stateWithTransit,
+      metadata: {
+        ...stateWithTransit.metadata,
+        [action.id]: {
+          ...stateWithTransit.metadata[action.id],
+          showSidebar: false,
+        },
+      },
+    });
+  });
+
+  it('should hide github widget sidebar', () => {
+    const action = { type: 'HIDE_WIDGET_SIDEBAR', id: 'github' };
+    const state = {
+      ...stateWithGithub,
+      metadata: {
+        ...stateWithGithub.metadata,
+        ['github']: {
+          ...stateWithGithub.metadata['github'],
+          showSidebar: true,
+        },
+      },
+    }
+    Reducer(rootReducer).withState(state).expect(action).toReturnState({
+      ...stateWithGithub,
+      metadata: {
+        ...stateWithGithub.metadata,
+        [action.id]: {
+          ...stateWithGithub.metadata[action.id],
+          showSidebar: false,
+        },
+      },
+    });
+  });
+
+  it('should hide slack widget sidebar', () => {
+    const action = { type: 'HIDE_WIDGET_SIDEBAR', id: 'slack' };
+    const state = {
+      ...stateWithSlack,
+      metadata: {
+        ...stateWithSlack.metadata,
+        ['slack']: {
+          ...stateWithSlack.metadata['slack'],
+          showSidebar: true,
+        },
+      },
+    }
+    Reducer(rootReducer).withState(state).expect(action).toReturnState({
+      ...stateWithSlack,
+      metadata: {
+        ...stateWithSlack.metadata,
+        [action.id]: {
+          ...stateWithSlack.metadata[action.id],
+          showSidebar: false,
+        },
+      },
+    });
+  });
+
+  it('should lock in the dashboard', () => {
+    const action = { type: 'LOCK_DASHBOARD' };
+    Reducer(rootReducer).withState(stateWithTransit).expect(action).toReturnState({
+      ...stateWithTransit,
+      showSidebar: false,
+      locked: true,
+      grid: {
+        ...stateWithTransit.grid,
+        layout: stateWithTransit.grid.layout.map(layoutObj => (
+          {
+            ...layoutObj,
+            static: true,
+          }
+        )),
+      },
+    });
+  });
+
+  it('should unlock the dashboard', () => {
+    const action = { type: 'UNLOCK_DASHBOARD' };
+    const state = {
+      ...stateWithTransit,
+      showSidebar: false,
+      locked: true,
+      grid: {
+        ...stateWithTransit.grid,
+        layout: stateWithTransit.grid.layout.map(layoutObj => (
+          {
+            ...layoutObj,
+            static: true,
+          }
+        )),
+      },
+    }
+    Reducer(rootReducer).withState(stateWithTransit).expect(action).toReturnState({
+      ...stateWithTransit,
+      showSidebar: false,
+      locked: false
+    });
+  });
+
 });

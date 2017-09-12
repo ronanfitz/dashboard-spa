@@ -115,7 +115,6 @@ describe('actions', () => {
     expect(actions.showWidgetSidebar(TYPES.GITHUB_WIDGET_ID)).toEqual(expectedAction);
   });
 
-  //HIDE_WIDGET_SIDEBAR
   it('should create an action to hide a transit widget sidebar', () => {
     const expectedAction = {
       type: TYPES.HIDE_WIDGET_SIDEBAR,
@@ -142,7 +141,6 @@ describe('actions', () => {
 
     expect(actions.hideWidgetSidebar(TYPES.GITHUB_WIDGET_ID)).toEqual(expectedAction);
   });
-
 
   it('should create an action to lock the widgets', () => {
     const expectedAction = {

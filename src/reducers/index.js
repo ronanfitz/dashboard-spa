@@ -3,9 +3,6 @@ import { transit as transitReducer } from '@databraid/transit-widget/lib/reducer
 import { github as githubReducer } from '@databraid/github-widget/lib/reducers';
 import { storeReducer as slackReducer } from '@databraid/slack-widget/lib/Reducers';
 
-// remove eslint exception when slack widget is implemented
-/* eslint-disable no-unused-vars  */
-
 import {
   TRANSIT_WIDGET_ID,
   SLACK_WIDGET_ID,

@@ -11,7 +11,7 @@ const state = {
 };
 
 /* eslint-disable react/jsx-boolean-value */
-xdescribe('ModalAddWidget component', () => {
+describe('ModalAddWidget component', () => {
   it('should render a component with props as specified ', () => {
     const addWidget = jest.fn();
     const hideAddWidgetModal = jest.fn();
