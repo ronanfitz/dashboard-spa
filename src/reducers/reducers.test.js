@@ -53,14 +53,25 @@ describe('rootReducer', () => {
     const action = { type: 'ADD_WIDGET', id: 'transit' };
     Reducer(rootReducer).withState(initialState).expect(action).toReturnState({
       ...initialState,
-      ids: ['transit'],
+      ids: [...initialState.ids, TRANSIT_WIDGET_ID],
       showAddWidgetModal: false,
       grid: {
         ...initialState.grid,
         layout: [
           ...initialState.grid.layout,
-          { i: TRANSIT_WIDGET_ID, x: 0, y: 0, w: 6, h: 8 },
+          { i: TRANSIT_WIDGET_ID, x: 0, y: 0, w: 6, h: 8, static: false },
         ],
+      },
+      metadata: {
+        ...initialState.metadata,
+        [action.id]: {
+          type: 'transit',
+          standardWidth: 6,
+          standardHeight: 8,
+          minWidth: 4,
+          minHeight: 4,
+          showSidebar: false,
+        },
       },
     });
   });

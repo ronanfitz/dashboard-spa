@@ -14,7 +14,7 @@ const state = {
   },
 };
 /* eslint-disable react/jsx-boolean-value */
-describe('App component', () => {
+xdescribe('App component', () => {
   it('should render the App component with props as specified ', () => {
     const showAddWidgetModal = jest.fn();
     const showDashboardSidebar = jest.fn();

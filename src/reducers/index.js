@@ -40,7 +40,7 @@ const initialState = {
   metadata: {},
 };
 
-const widgets = (state = initialState, action) => {
+export const widgets = (state = initialState, action) => {
   switch (action.type) {
     case ADD_WIDGET:
       if (action.id === TRANSIT_WIDGET_ID && !state.ids.includes(TRANSIT_WIDGET_ID)) {
