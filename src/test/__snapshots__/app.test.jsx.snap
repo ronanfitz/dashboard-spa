@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component should render the App component with props as specified  1`] = `
+<div
+  className="page-container"
+>
+  <div
+    className="grid-container"
+  >
+    <SidebarPushable
+      as={[Function]}
+    >
+      <Sidebar
+        animation="overlay"
+        as={[Function]}
+        direction="right"
+        icon="labeled"
+        inverted={true}
+        vertical={true}
+        visible={true}
+        width="thin"
+      >
+        <MenuItem
+          name="Add_Widget"
+          onClick={[Function]}
+        >
+          <Icon
+            as="i"
+            name="add circle"
+          />
+          Add Widget
+        </MenuItem>
+        <MenuItem
+          disabled={true}
+          name="Settings"
+        >
+          <Icon
+            as="i"
+            name="cogs"
+          />
+          Settings
+        </MenuItem>
+      </Sidebar>
+      <SidebarPusher>
+        <Segment
+          basic={true}
+        >
+          <_class
+            className="layout"
+            cols={12}
+            layout={
+              Array [
+                Object {
+                  "h": 8,
+                  "i": "slack",
+                  "static": true,
+                  "w": 6,
+                  "x": 0,
+                  "y": 8,
+                },
+              ]
+            }
+            measureBeforeMount={false}
+            rowHeight={30}
+            verticalCompact={false}
+            width={1200}
+          >
+            <div>
+              <Connect(App)
+                widgetId="github"
+              />
+            </div>
+          </_class>
+        </Segment>
+      </SidebarPusher>
+    </SidebarPushable>
+  </div>
+  <div
+    className="sideStrip"
+    onClick={[Function]}
+    role="link"
+    tabIndex="-1"
+  >
+    <Icon
+      as="i"
+      name="chevron right"
+    />
+  </div>
+  <Connect(Component) />
+</div>
+`;
