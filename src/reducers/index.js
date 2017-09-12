@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { transit as transitReducer } from '@databraid/transit-widget/lib/reducers';
 import { github as githubReducer } from '@databraid/github-widget/lib/reducers';
 import { storeReducer as slackReducer } from '@databraid/slack-widget/lib/Reducers';
+import { REHYDRATE } from 'redux-persist/constants';
 // remove eslint exception when slack widget is implemented
 /* eslint-disable no-unused-vars  */
 
@@ -32,7 +33,6 @@ const initialState = {
 const widgets = (state = initialState, action) => {
   switch (action.type) {
     case ADD_WIDGET:
-
       if (action.id === TRANSIT_WIDGET_ID && !state.ids.includes(TRANSIT_WIDGET_ID)) {
         return {
           ...state,
@@ -78,7 +78,6 @@ const widgets = (state = initialState, action) => {
         showAddWidgetModal: false,
       };
 
-
     case SHOW_ADD_WIDGET_MODAL:
       return {
         ...state,
@@ -102,6 +101,14 @@ const widgets = (state = initialState, action) => {
       return {
         ...state,
         showSidebar: false,
+      };
+
+    case REHYDRATE:
+      /* You can also only pass in what you want to persist in the store by
+      accessing the path you want to persist from the action.payload. */
+      return {
+        ...state,
+        ...action.payload.widgets,
       };
 
     default:
