@@ -36,7 +36,7 @@ const stateWithTransit = {
     cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
   },
   metadata: {
-    ['transit']: {
+    transit: {
       type: 'transit',
       standardWidth: 6,
       standardHeight: 8,
@@ -61,7 +61,7 @@ const stateWithGithub = {
     cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
   },
   metadata: {
-    ['github']: {
+    github: {
       type: 'github',
       standardWidth: 6,
       standardHeight: 8,
@@ -86,7 +86,7 @@ const stateWithSlack = {
     cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
   },
   metadata: {
-    ['slack']: {
+    slack: {
       type: 'slack',
       standardWidth: 6,
       standardHeight: 6,
@@ -127,21 +127,21 @@ describe('rootReducer', () => {
   it('should add the transit widget to the dashboard', () => {
     const action = { type: 'ADD_WIDGET', id: 'transit' };
     Reducer(rootReducer).withState(initialState).expect(action).toReturnState({
-      ...stateWithTransit
+      ...stateWithTransit,
     });
   });
 
   it('should add the github widget to the dashboard', () => {
     const action = { type: 'ADD_WIDGET', id: 'github' };
     Reducer(rootReducer).withState(initialState).expect(action).toReturnState({
-      ...stateWithGithub
+      ...stateWithGithub,
     });
   });
 
   it('should add the slack widget to the dashboard', () => {
     const action = { type: 'ADD_WIDGET', id: 'slack' };
     Reducer(rootReducer).withState(initialState).expect(action).toReturnState({
-      ...stateWithSlack
+      ...stateWithSlack,
     });
   });
 
@@ -149,7 +149,7 @@ describe('rootReducer', () => {
     const action = { type: 'REMOVE_WIDGET', id: 'transit' };
     Reducer(rootReducer).withState(stateWithTransit).expect(action).toReturnState({
       ...stateWithTransit,
-      ids: []
+      ids: [],
     });
   });
 
@@ -157,7 +157,7 @@ describe('rootReducer', () => {
     const action = { type: 'REMOVE_WIDGET', id: 'github' };
     Reducer(rootReducer).withState(stateWithGithub).expect(action).toReturnState({
       ...stateWithGithub,
-      ids: []
+      ids: [],
     });
   });
 
@@ -165,7 +165,7 @@ describe('rootReducer', () => {
     const action = { type: 'REMOVE_WIDGET', id: 'slack' };
     Reducer(rootReducer).withState(stateWithSlack).expect(action).toReturnState({
       ...stateWithSlack,
-      ids: []
+      ids: [],
     });
   });
 
@@ -250,12 +250,12 @@ describe('rootReducer', () => {
       ...stateWithTransit,
       metadata: {
         ...stateWithTransit.metadata,
-        ['transit']: {
-          ...stateWithTransit.metadata['transit'],
+        transit: {
+          ...stateWithTransit.metadata.transit,
           showSidebar: true,
         },
       },
-    }
+    };
     Reducer(rootReducer).withState(state).expect(action).toReturnState({
       ...stateWithTransit,
       metadata: {
@@ -274,12 +274,12 @@ describe('rootReducer', () => {
       ...stateWithGithub,
       metadata: {
         ...stateWithGithub.metadata,
-        ['github']: {
-          ...stateWithGithub.metadata['github'],
+        github: {
+          ...stateWithGithub.metadata.github,
           showSidebar: true,
         },
       },
-    }
+    };
     Reducer(rootReducer).withState(state).expect(action).toReturnState({
       ...stateWithGithub,
       metadata: {
@@ -298,12 +298,12 @@ describe('rootReducer', () => {
       ...stateWithSlack,
       metadata: {
         ...stateWithSlack.metadata,
-        ['slack']: {
-          ...stateWithSlack.metadata['slack'],
+        slack: {
+          ...stateWithSlack.metadata.slack,
           showSidebar: true,
         },
       },
-    }
+    };
     Reducer(rootReducer).withState(state).expect(action).toReturnState({
       ...stateWithSlack,
       metadata: {
@@ -349,12 +349,11 @@ describe('rootReducer', () => {
           }
         )),
       },
-    }
-    Reducer(rootReducer).withState(stateWithTransit).expect(action).toReturnState({
+    };
+    Reducer(rootReducer).withState(state).expect(action).toReturnState({
       ...stateWithTransit,
       showSidebar: false,
-      locked: false
+      locked: false,
     });
   });
-
 });
