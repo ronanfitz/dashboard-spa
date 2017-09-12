@@ -1,7 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
-import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import App from './App';
 import store from './store';
@@ -13,6 +12,6 @@ const Root = (
   </Provider>
 );
 
-ReactDOM.render(Root, document.getElementById('root'));
+ReactDOM.render(Root, document.getElementById('dashboard-root'));
 
 registerServiceWorker();
