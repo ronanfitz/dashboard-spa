@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { transit as transitReducer } from '@databraid/transit-widget/lib/reducers';
 import { github as githubReducer } from '@databraid/github-widget/lib/reducers';
 import { storeReducer as slackReducer } from '@databraid/slack-widget/lib/Reducers';
+import { REHYDRATE } from 'redux-persist/constants';
 
 import {
   TRANSIT_WIDGET_ID,
@@ -131,6 +132,7 @@ export const widgets = (state = initialState, action) => {
         ids: newIds,
       };
     }
+
     case SHOW_ADD_WIDGET_MODAL:
       return {
         ...state,
@@ -154,6 +156,14 @@ export const widgets = (state = initialState, action) => {
       return {
         ...state,
         showSidebar: false,
+      };
+
+    case REHYDRATE:
+      /* You can also only pass in what you want to persist in the store by
+      accessing the path you want to persist from the action.payload. */
+      return {
+        ...state,
+        ...action.payload.widgets,
       };
 
     case SHOW_WIDGET_SIDEBAR:
@@ -224,7 +234,6 @@ export const widgets = (state = initialState, action) => {
       };
   }
 };
-
 
 const rootReducer = combineReducers({
   widgets,
