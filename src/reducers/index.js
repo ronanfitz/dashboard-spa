@@ -3,8 +3,6 @@ import { transit as transitReducer } from '@databraid/transit-widget/lib/reducer
 import { github as githubReducer } from '@databraid/github-widget/lib/reducers';
 import { storeReducer as slackReducer } from '@databraid/slack-widget/lib/Reducers';
 import { REHYDRATE } from 'redux-persist/constants';
-// remove eslint exception when slack widget is implemented
-/* eslint-disable no-unused-vars  */
 
 import {
   TRANSIT_WIDGET_ID,
@@ -40,7 +38,7 @@ const initialState = {
   metadata: {},
 };
 
-const widgets = (state = initialState, action) => {
+export const widgets = (state = initialState, action) => {
   switch (action.type) {
     case ADD_WIDGET:
       if (action.id === TRANSIT_WIDGET_ID && !state.ids.includes(TRANSIT_WIDGET_ID)) {
