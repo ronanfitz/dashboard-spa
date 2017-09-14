@@ -2,7 +2,7 @@ import { Reducer } from 'redux-testkit';
 import { transit as transitReducer } from '@databraid/transit-widget/lib/reducers';
 import { github as githubReducer } from '@databraid/github-widget/lib/reducers';
 import { storeReducer as slackReducer } from '@databraid/slack-widget/lib/Reducers';
-import { widgets as rootReducer } from './index';
+import { widgets as rootReducer, collapseWidgetSidebars } from './index';
 import {
   TRANSIT_WIDGET_ID,
   SLACK_WIDGET_ID,
@@ -14,6 +14,7 @@ const initialState = {
   byId: {},
   showSidebar: true,
   showAddWidgetModal: false,
+  metadata: {},
   grid: {
     nextId: 1,
     layout: [],
@@ -213,6 +214,7 @@ describe('rootReducer', () => {
           showSidebar: true,
         },
       },
+      showSidebar: false,
     });
   });
 
@@ -227,6 +229,7 @@ describe('rootReducer', () => {
           showSidebar: true,
         },
       },
+      showSidebar: false,
     });
   });
 
@@ -241,6 +244,7 @@ describe('rootReducer', () => {
           showSidebar: true,
         },
       },
+      showSidebar: false,
     });
   });
 
@@ -357,3 +361,18 @@ describe('rootReducer', () => {
     });
   });
 });
+
+describe('non-reducer functions', () => {
+  it('should return new metadata with all widget sidebars not showing', () => {
+    expect(collapseWidgetSidebars({transit:{
+        type: 'transit',
+        standardWidth: 6,
+        standardHeight: 8,
+        minWidth: 4,
+        minHeight: 4,
+        showSidebar: true,
+      }
+    })).toEqual(stateWithTransit.metadata);
+  });
+});
+

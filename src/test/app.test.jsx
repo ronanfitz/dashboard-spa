@@ -2,7 +2,7 @@ import React from 'react';
 import toJson from 'enzyme-to-json';
 import { shallow } from 'enzyme';
 /* eslint-disable import/extensions */
-import { App, mapStateToProps, mapDispatchToProps } from '../App.jsx';
+import { AppComponent, mapStateToProps, mapDispatchToProps } from '../App.jsx';
 
 const state = {
   widgets: {
@@ -20,7 +20,7 @@ describe('App component', () => {
     const showDashboardSidebar = jest.fn();
     const hideDashboardSidebar = jest.fn();
     const component = shallow(
-      <App
+      <AppComponent
         showAddWidgetModal={showAddWidgetModal}
         showDashboardSidebar={showDashboardSidebar}
         hideDashboardSidebar={hideDashboardSidebar}
@@ -53,7 +53,7 @@ describe('App component', () => {
     const showDashboardSidebar = jest.fn();
     const hideDashboardSidebar = jest.fn();
     const component = shallow(
-      <App
+      <AppComponent
         showAddWidgetModal={showAddWidgetModal}
         showDashboardSidebar={showDashboardSidebar}
         hideDashboardSidebar={hideDashboardSidebar}
