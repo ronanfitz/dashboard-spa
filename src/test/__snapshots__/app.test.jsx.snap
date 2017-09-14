@@ -81,6 +81,7 @@ exports[`App component should render the App component with props as specified  
               ]
             }
             measureBeforeMount={false}
+            onLayoutChange={[Function]}
             rowHeight={30}
             verticalCompact={false}
             width={1200}

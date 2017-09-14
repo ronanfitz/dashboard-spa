@@ -75,7 +75,7 @@ export const AppComponent = (props) => {
                 cols={12}
                 rowHeight={30}
                 width={1200}
-                onLayoutChange={(layout)=>{props.saveLayoutChange(layout)}}
+                onLayoutChange={(layout) => { props.saveLayoutChange(layout); }}
               >
                 {components}
               </Grid>
@@ -111,7 +111,7 @@ AppComponent.propTypes = {
   saveLayoutChange: PropTypes.func.isRequired,
 };
 
-export const mapStateToProps = state => {
+export const mapStateToProps = (state) => {
   const ids = state.widgets.ids;
   const layout = state.widgets.grid.layout;
   const showSidebar = state.widgets.showSidebar;

@@ -362,7 +362,7 @@ describe('rootReducer', () => {
   it('should persist new grid layout to state', () => {
     const action = {
       type: 'SAVE_LAYOUT_CHANGE',
-      layout: [{ i: TRANSIT_WIDGET_ID, x: 2, y: 3, w: 6, h: 8, static: false }]
+      layout: [{ i: TRANSIT_WIDGET_ID, x: 2, y: 3, w: 6, h: 8, static: false }],
     };
 
     Reducer(rootReducer).withState(stateWithTransit).expect(action).toReturnState({

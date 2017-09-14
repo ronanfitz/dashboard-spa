@@ -254,7 +254,7 @@ export const widgets = (state = initialState, action) => {
         grid: {
           ...state.grid,
           layout: action.layout,
-        }
+        },
       };
 
     default:
