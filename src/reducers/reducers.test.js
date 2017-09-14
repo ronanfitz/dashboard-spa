@@ -364,14 +364,14 @@ describe('rootReducer', () => {
 
 describe('non-reducer functions', () => {
   it('should return new metadata with all widget sidebars not showing', () => {
-    expect(collapseWidgetSidebars({transit:{
-        type: 'transit',
-        standardWidth: 6,
-        standardHeight: 8,
-        minWidth: 4,
-        minHeight: 4,
-        showSidebar: true,
-      }
+    expect(collapseWidgetSidebars({ transit: {
+      type: 'transit',
+      standardWidth: 6,
+      standardHeight: 8,
+      minWidth: 4,
+      minHeight: 4,
+      showSidebar: true,
+    },
     })).toEqual(stateWithTransit.metadata);
   });
 });
