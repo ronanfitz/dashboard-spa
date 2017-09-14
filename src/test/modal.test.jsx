@@ -1,7 +1,7 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
 import { shallow } from 'enzyme';
-import { ModalAddWidget, mapStateToProps, mapDispatchToProps } from '../components/ModalAddWidget/';
+import { AddWidgetModal, mapStateToProps, mapDispatchToProps } from '../components/ModalAddWidget/';
 
 const state = {
   widgets: {
@@ -11,12 +11,12 @@ const state = {
 };
 
 /* eslint-disable react/jsx-boolean-value */
-describe('ModalAddWidget component', () => {
+describe('AddWidgetModal component', () => {
   it('should render a component with props as specified ', () => {
     const addWidget = jest.fn();
     const hideAddWidgetModal = jest.fn();
     const component = shallow(
-      <ModalAddWidget
+      <AddWidgetModal
         addWidget={addWidget}
         hideAddWidgetModal={hideAddWidgetModal}
         ids={['slack']}

@@ -17,7 +17,7 @@ import WidgetContainer from './components/WidgetContainer/';
 
 const Grid = ReactGridLayout.WidthProvider(ReactGridLayout);
 
-const App = (props) => {
+export const AppComponent = (props) => {
   const components = (props.ids).map(widgetId => (
     <div key={widgetId} className="widget-container">
       <WidgetContainer id={widgetId} />
@@ -89,7 +89,7 @@ const App = (props) => {
   );
 };
 
-App.propTypes = {
+AppComponent.propTypes = {
   ids: PropTypes.arrayOf(PropTypes.string).isRequired,
   layout: PropTypes.arrayOf(PropTypes.shape({
     i: PropTypes.string.isRequired,
@@ -129,4 +129,4 @@ dispatch);
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(App);
+)(AppComponent);
