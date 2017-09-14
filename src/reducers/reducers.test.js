@@ -24,7 +24,9 @@ const initialState = {
 };
 
 const stateWithTransit = {
-  byId: {},
+  byId: {
+    [TRANSIT_WIDGET_ID]: transitReducer(undefined, {}),
+  },
   showSidebar: true,
   ids: [TRANSIT_WIDGET_ID],
   showAddWidgetModal: false,
@@ -49,7 +51,9 @@ const stateWithTransit = {
 };
 
 const stateWithGithub = {
-  byId: {},
+  byId: {
+    [GITHUB_WIDGET_ID]: githubReducer(undefined, {}),
+  },
   showSidebar: true,
   ids: [GITHUB_WIDGET_ID],
   showAddWidgetModal: false,
@@ -74,7 +78,9 @@ const stateWithGithub = {
 };
 
 const stateWithSlack = {
-  byId: {},
+  byId: {
+    [SLACK_WIDGET_ID]: slackReducer(undefined, {}),
+  },
   showSidebar: true,
   ids: [SLACK_WIDGET_ID],
   showAddWidgetModal: false,
@@ -103,11 +109,7 @@ describe('rootReducer', () => {
     expect(rootReducer(initialState, {}))
       .toEqual({
         ...initialState,
-        byId: {
-          [TRANSIT_WIDGET_ID]: transitReducer(undefined, {}),
-          [GITHUB_WIDGET_ID]: githubReducer(undefined, {}),
-          [SLACK_WIDGET_ID]: slackReducer(undefined, {}),
-        },
+        showSidebar: true,
       });
   });
 
@@ -117,11 +119,7 @@ describe('rootReducer', () => {
       .expect({ type: 'NOT_EXISTING' })
       .toReturnState({
         ...initialState,
-        byId: {
-          [TRANSIT_WIDGET_ID]: transitReducer(undefined, {}),
-          [GITHUB_WIDGET_ID]: githubReducer(undefined, {}),
-          [SLACK_WIDGET_ID]: slackReducer(undefined, {}),
-        },
+        showSidebar: true,
       });
   });
 
