@@ -9,6 +9,7 @@ import {
   HIDE_WIDGET_SIDEBAR,
   LOCK_DASHBOARD,
   UNLOCK_DASHBOARD,
+  SAVE_LAYOUT_CHANGE,
 } from '../constants';
 
 export function addWidget(widgetType) {
@@ -49,5 +50,9 @@ export function lockDashboard() {
 
 export function unlockDashboard() {
   return { type: UNLOCK_DASHBOARD };
+}
+
+export function saveLayoutChange(layout) {
+  return { type: SAVE_LAYOUT_CHANGE, layout };
 }
 
