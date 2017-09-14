@@ -38,6 +38,17 @@ const initialState = {
   metadata: {},
 };
 
+export const collapseWidgetSidebars = (metadata) => {
+  const newMetadata = { ...metadata };
+  Object.keys(newMetadata).forEach((widgetId) => {
+    newMetadata[widgetId] = {
+      ...metadata[widgetId],
+      showSidebar: false,
+    };
+  });
+  return newMetadata;
+};
+
 export const widgets = (state = initialState, action) => {
   switch (action.type) {
     case ADD_WIDGET:
@@ -150,6 +161,7 @@ export const widgets = (state = initialState, action) => {
       return {
         ...state,
         showSidebar: true,
+        metadata: collapseWidgetSidebars(state.metadata),
       };
 
     case HIDE_DASHBOARD_SIDEBAR:
@@ -170,12 +182,13 @@ export const widgets = (state = initialState, action) => {
       return {
         ...state,
         metadata: {
-          ...state.metadata,
+          ...collapseWidgetSidebars(state.metadata),
           [action.id]: {
             ...state.metadata[action.id],
             showSidebar: true,
           },
         },
+        showSidebar: false,
       };
 
     case HIDE_WIDGET_SIDEBAR:
