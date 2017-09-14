@@ -5,6 +5,17 @@ exports[`App component should render the App component with props as specified  
   className="page-container"
 >
   <div
+    className="side-strip"
+    onClick={[Function]}
+    role="link"
+    tabIndex="-1"
+  >
+    <Icon
+      as="i"
+      name="chevron right"
+    />
+  </div>
+  <div
     className="grid-container"
   >
     <SidebarPushable
@@ -21,7 +32,7 @@ exports[`App component should render the App component with props as specified  
         width="thin"
       >
         <MenuItem
-          name="Add_Widget"
+          name="add_widget"
           onClick={[Function]}
         >
           <Icon
@@ -31,12 +42,21 @@ exports[`App component should render the App component with props as specified  
           Add Widget
         </MenuItem>
         <MenuItem
-          disabled={true}
-          name="Settings"
+          name="lock-unlock-dashboard"
         >
           <Icon
             as="i"
-            name="cogs"
+            name="lock"
+          />
+          Lock
+        </MenuItem>
+        <MenuItem
+          disabled={true}
+          name="settings"
+        >
+          <Icon
+            as="i"
+            name="setting"
           />
           Settings
         </MenuItem>
@@ -65,26 +85,17 @@ exports[`App component should render the App component with props as specified  
             verticalCompact={false}
             width={1200}
           >
-            <div>
-              <Connect(App)
-                widgetId="github"
+            <div
+              className="widget-container"
+            >
+              <Connect(WidgetContainer)
+                id="github"
               />
             </div>
           </_class>
         </Segment>
       </SidebarPusher>
     </SidebarPushable>
-  </div>
-  <div
-    className="sideStrip"
-    onClick={[Function]}
-    role="link"
-    tabIndex="-1"
-  >
-    <Icon
-      as="i"
-      name="chevron right"
-    />
   </div>
   <Connect(Component) />
 </div>
