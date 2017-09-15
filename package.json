@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@databraid/github-widget": "^1.0.16",
-    "@databraid/slack-widget": "1.0.18",
+    "@databraid/slack-widget": "^1.0.21",
     "@databraid/transit-widget": "^1.0.21",
     "prop-types": "15.5.10",
     "react": "15.6.1",
