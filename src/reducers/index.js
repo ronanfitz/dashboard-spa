@@ -21,6 +21,7 @@ import {
   HIDE_WIDGET_SIDEBAR,
   LOCK_DASHBOARD,
   UNLOCK_DASHBOARD,
+  SAVE_LAYOUT_CHANGE,
 } from '../constants';
 
 const initialState = {
@@ -232,6 +233,15 @@ export const widgets = (state = initialState, action) => {
               static: false,
             }
           )),
+        },
+      };
+
+    case SAVE_LAYOUT_CHANGE:
+      return {
+        ...state,
+        grid: {
+          ...state.grid,
+          layout: action.layout,
         },
       };
 

@@ -157,4 +157,13 @@ describe('actions', () => {
 
     expect(actions.unlockDashboard()).toEqual(expectedAction);
   });
+
+  it('should create an action to save grid layout changes', () => {
+    const expectedAction = {
+      type: TYPES.SAVE_LAYOUT_CHANGE,
+      layout: undefined,
+    };
+
+    expect(actions.saveLayoutChange(undefined)).toEqual(expectedAction);
+  });
 });

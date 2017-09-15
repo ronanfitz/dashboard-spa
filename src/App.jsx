@@ -11,6 +11,7 @@ import {
   hideDashboardSidebar,
   lockDashboard,
   unlockDashboard,
+  saveLayoutChange,
 } from './actions';
 import ModalAddWidget from './components/ModalAddWidget/';
 import WidgetContainer from './components/WidgetContainer/';
@@ -74,6 +75,7 @@ export const AppComponent = (props) => {
                 cols={12}
                 rowHeight={30}
                 width={1200}
+                onLayoutChange={(layout) => { props.saveLayoutChange(layout); }}
               >
                 {components}
               </Grid>
@@ -106,6 +108,7 @@ AppComponent.propTypes = {
   hideDashboardSidebar: PropTypes.func.isRequired,
   lockDashboard: PropTypes.func.isRequired,
   unlockDashboard: PropTypes.func.isRequired,
+  saveLayoutChange: PropTypes.func.isRequired,
 };
 
 export const mapStateToProps = (state) => {
@@ -122,6 +125,7 @@ export const mapDispatchToProps = dispatch => bindActionCreators({
   hideDashboardSidebar,
   lockDashboard,
   unlockDashboard,
+  saveLayoutChange,
 },
 dispatch);
 
