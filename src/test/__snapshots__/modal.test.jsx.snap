@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ModalAddWidget component should render a component with props as specified  1`] = `
+exports[`AddWidgetModal component should render a component with props as specified  1`] = `
 <Modal
   basic={true}
   closeOnDimmerClick={true}

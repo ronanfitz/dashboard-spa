@@ -11,13 +11,14 @@ import {
   hideDashboardSidebar,
   lockDashboard,
   unlockDashboard,
+  saveLayoutChange,
 } from './actions';
 import ModalAddWidget from './components/ModalAddWidget/';
 import WidgetContainer from './components/WidgetContainer/';
 
 const Grid = ReactGridLayout.WidthProvider(ReactGridLayout);
 
-const App = (props) => {
+export const AppComponent = (props) => {
   const components = (props.ids).map(widgetId => (
     <div key={widgetId} className="widget-container">
       <WidgetContainer id={widgetId} />
@@ -74,6 +75,7 @@ const App = (props) => {
                 cols={12}
                 rowHeight={30}
                 width={1200}
+                onLayoutChange={(layout) => { props.saveLayoutChange(layout); }}
               >
                 {components}
               </Grid>
@@ -89,7 +91,7 @@ const App = (props) => {
   );
 };
 
-App.propTypes = {
+AppComponent.propTypes = {
   ids: PropTypes.arrayOf(PropTypes.string).isRequired,
   layout: PropTypes.arrayOf(PropTypes.shape({
     i: PropTypes.string.isRequired,
@@ -106,6 +108,7 @@ App.propTypes = {
   hideDashboardSidebar: PropTypes.func.isRequired,
   lockDashboard: PropTypes.func.isRequired,
   unlockDashboard: PropTypes.func.isRequired,
+  saveLayoutChange: PropTypes.func.isRequired,
 };
 
 export const mapStateToProps = (state) => {
@@ -122,6 +125,7 @@ export const mapDispatchToProps = dispatch => bindActionCreators({
   hideDashboardSidebar,
   lockDashboard,
   unlockDashboard,
+  saveLayoutChange,
 },
 dispatch);
 
@@ -129,4 +133,4 @@ dispatch);
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(App);
+)(AppComponent);

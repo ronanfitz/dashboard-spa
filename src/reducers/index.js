@@ -2,9 +2,7 @@ import { combineReducers } from 'redux';
 import { transit as transitReducer } from '@databraid/transit-widget/lib/reducers';
 import { github as githubReducer } from '@databraid/github-widget/lib/reducers';
 import { storeReducer as slackReducer } from '@databraid/slack-widget/lib/Reducers';
-
-// remove eslint exception when slack widget is implemented
-/* eslint-disable no-unused-vars  */
+import { REHYDRATE } from 'redux-persist/constants';
 
 import {
   TRANSIT_WIDGET_ID,
@@ -23,6 +21,7 @@ import {
   HIDE_WIDGET_SIDEBAR,
   LOCK_DASHBOARD,
   UNLOCK_DASHBOARD,
+  SAVE_LAYOUT_CHANGE,
 } from '../constants';
 
 const initialState = {
@@ -40,7 +39,18 @@ const initialState = {
   metadata: {},
 };
 
-const widgets = (state = initialState, action) => {
+export const collapseWidgetSidebars = (metadata) => {
+  const newMetadata = { ...metadata };
+  Object.keys(newMetadata).forEach((widgetId) => {
+    newMetadata[widgetId] = {
+      ...metadata[widgetId],
+      showSidebar: false,
+    };
+  });
+  return newMetadata;
+};
+
+export const widgets = (state = initialState, action) => {
   switch (action.type) {
     case ADD_WIDGET:
       if (action.id === TRANSIT_WIDGET_ID && !state.ids.includes(TRANSIT_WIDGET_ID)) {
@@ -134,6 +144,7 @@ const widgets = (state = initialState, action) => {
         ids: newIds,
       };
     }
+
     case SHOW_ADD_WIDGET_MODAL:
       return {
         ...state,
@@ -151,6 +162,7 @@ const widgets = (state = initialState, action) => {
       return {
         ...state,
         showSidebar: true,
+        metadata: collapseWidgetSidebars(state.metadata),
       };
 
     case HIDE_DASHBOARD_SIDEBAR:
@@ -159,16 +171,25 @@ const widgets = (state = initialState, action) => {
         showSidebar: false,
       };
 
+    case REHYDRATE:
+      /* You can also only pass in what you want to persist in the store by
+      accessing the path you want to persist from the action.payload. */
+      return {
+        ...state,
+        ...action.payload.widgets,
+      };
+
     case SHOW_WIDGET_SIDEBAR:
       return {
         ...state,
         metadata: {
-          ...state.metadata,
+          ...collapseWidgetSidebars(state.metadata),
           [action.id]: {
             ...state.metadata[action.id],
             showSidebar: true,
           },
         },
+        showSidebar: false,
       };
 
     case HIDE_WIDGET_SIDEBAR:
@@ -215,6 +236,15 @@ const widgets = (state = initialState, action) => {
         },
       };
 
+    case SAVE_LAYOUT_CHANGE:
+      return {
+        ...state,
+        grid: {
+          ...state.grid,
+          layout: action.layout,
+        },
+      };
+
     default:
       return {
         ...state,
@@ -227,7 +257,6 @@ const widgets = (state = initialState, action) => {
       };
   }
 };
-
 
 const rootReducer = combineReducers({
   widgets,
