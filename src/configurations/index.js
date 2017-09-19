@@ -1,13 +1,7 @@
-import {
-  TRANSIT_WIDGET,
-  SLACK_WIDGET,
-  GITHUB_WIDGET,
-  SHEET_WIDGET,
-} from '../constants';
-
 export default [
   {
     type: 'transit',
+    icon: 'rocket',
     initHeight: 8,
     initWidth: 6,
     minHeight: 4,
@@ -15,6 +9,7 @@ export default [
   },
   {
     type: 'github',
+    icon: 'github',
     initHeight: 8,
     initWidth: 6,
     minHeight: 4,
@@ -22,6 +17,7 @@ export default [
   },
   {
     type: 'slack',
+    icon: 'slack',
     initHeight: 6,
     initWidth: 4,
     minHeight: 4,
@@ -29,6 +25,7 @@ export default [
   },
   {
     type: 'sheets',
+    icon: 'table',
     initHeight: 8,
     initWidth: 8,
     minHeight: 4,
