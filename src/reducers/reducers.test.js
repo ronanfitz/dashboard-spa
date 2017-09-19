@@ -36,7 +36,16 @@ const stateWithTransit = {
   grid: {
     nextId: 1,
     layout: [
-      { i: TRANSIT_WIDGET_ID, x: 0, y: 0, w: 6, h: 8, static: false },
+      {
+        i: TRANSIT_WIDGET_ID,
+        x: 0,
+        y: 0,
+        w: 6,
+        h: 8,
+        minH: 4,
+        minW: 3,
+        static: false
+      },
     ],
     breakpoints: { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 },
     cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
@@ -44,10 +53,6 @@ const stateWithTransit = {
   metadata: {
     transit: {
       type: 'transit',
-      standardWidth: 6,
-      standardHeight: 8,
-      minWidth: 4,
-      minHeight: 4,
       showSidebar: false,
     },
   },
@@ -61,7 +66,16 @@ const stateWithGithub = {
   grid: {
     nextId: 1,
     layout: [
-      { i: GITHUB_WIDGET_ID, x: 0, y: 0, w: 6, h: 8, static: false },
+      {
+        i: GITHUB_WIDGET_ID,
+        x: 0,
+        y: 0,
+        w: 6,
+        h: 8,
+        minH: 4,
+        minW: 3,
+        static: false
+      },
     ],
     breakpoints: { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 },
     cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
@@ -69,10 +83,6 @@ const stateWithGithub = {
   metadata: {
     github: {
       type: 'github',
-      standardWidth: 6,
-      standardHeight: 8,
-      minWidth: 4,
-      minHeight: 4,
       showSidebar: false,
     },
   },
@@ -86,7 +96,16 @@ const stateWithSlack = {
   grid: {
     nextId: 1,
     layout: [
-      { i: SLACK_WIDGET_ID, x: 0, y: 0, w: 6, h: 8, static: false },
+      {
+        i: SLACK_WIDGET_ID,
+        x: 0,
+        y: 0,
+        w: 4,
+        h: 6,
+        minH: 4,
+        minW: 3,
+        static: false
+      },
     ],
     breakpoints: { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 },
     cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
@@ -94,10 +113,6 @@ const stateWithSlack = {
   metadata: {
     slack: {
       type: 'slack',
-      standardWidth: 6,
-      standardHeight: 6,
-      minWidth: 4,
-      minHeight: 4,
       showSidebar: false,
     },
   },
@@ -369,7 +384,7 @@ describe('rootReducer', () => {
   it('should persist new grid layout to state', () => {
     const action = {
       type: 'SAVE_LAYOUT_CHANGE',
-      layout: [{ i: TRANSIT_WIDGET_ID, x: 2, y: 3, w: 6, h: 8, static: false }],
+      layout: [{ i: TRANSIT_WIDGET_ID, x: 2, y: 3, w: 6, h: 8, minH: 4, minW: 4, static: false }],
     };
 
     Reducer(rootReducer).withState(stateWithTransit).expect(action).toReturnState({
@@ -380,7 +395,7 @@ describe('rootReducer', () => {
       grid: {
         nextId: 1,
         layout: [
-          { i: TRANSIT_WIDGET_ID, x: 2, y: 3, w: 6, h: 8, static: false },
+          { i: TRANSIT_WIDGET_ID, x: 2, y: 3, w: 6, h: 8, minH: 4, minW: 4, static: false },
         ],
         breakpoints: { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 },
         cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
@@ -388,10 +403,6 @@ describe('rootReducer', () => {
       metadata: {
         transit: {
           type: 'transit',
-          standardWidth: 6,
-          standardHeight: 8,
-          minWidth: 4,
-          minHeight: 4,
           showSidebar: false,
         },
       },
@@ -449,10 +460,6 @@ describe('non-reducer functions', () => {
     it('should return new metadata with all widget sidebars not showing', () => {
       expect(collapseWidgetSidebars({ transit: {
         type: 'transit',
-        standardWidth: 6,
-        standardHeight: 8,
-        minWidth: 4,
-        minHeight: 4,
         showSidebar: true,
       },
       })).toEqual(stateWithTransit.metadata);
