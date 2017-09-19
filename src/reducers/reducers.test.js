@@ -44,7 +44,7 @@ const stateWithTransit = {
         h: 8,
         minH: 4,
         minW: 3,
-        static: false
+        static: false,
       },
     ],
     breakpoints: { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 },
@@ -74,7 +74,7 @@ const stateWithGithub = {
         h: 8,
         minH: 4,
         minW: 3,
-        static: false
+        static: false,
       },
     ],
     breakpoints: { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 },
@@ -104,7 +104,7 @@ const stateWithSlack = {
         h: 6,
         minH: 4,
         minW: 3,
-        static: false
+        static: false,
       },
     ],
     breakpoints: { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 },
