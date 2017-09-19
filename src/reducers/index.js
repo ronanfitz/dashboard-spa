@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { sheets as sheetsReducer } from '@databraid/sheets-widget/lib/reducers';
 import { transit as transitReducer } from '@databraid/transit-widget/lib/reducers';
 import { github as githubReducer } from '@databraid/github-widget/lib/reducers';
 import { storeReducer as slackReducer } from '@databraid/slack-widget/lib/Reducers';
@@ -8,9 +9,11 @@ import {
   TRANSIT_WIDGET_ID,
   SLACK_WIDGET_ID,
   GITHUB_WIDGET_ID,
+  SHEETS_WIDGET_ID,
   TRANSIT_WIDGET,
   SLACK_WIDGET,
   GITHUB_WIDGET,
+  SHEETS_WIDGET,
   ADD_WIDGET,
   REMOVE_WIDGET,
   SHOW_ADD_WIDGET_MODAL,
@@ -23,6 +26,8 @@ import {
   UNLOCK_DASHBOARD,
   SAVE_LAYOUT_CHANGE,
 } from '../constants';
+
+console.log('sheetsReducer', sheetsReducer);
 
 const initialState = {
   ids: [],
@@ -117,6 +122,30 @@ export const widgets = (state = initialState, action) => {
             ...state.metadata,
             [action.id]: {
               type: SLACK_WIDGET,
+              standardWidth: 6,
+              standardHeight: 6,
+              minWidth: 4,
+              minHeight: 4,
+              showSidebar: false,
+            },
+          },
+        };
+      } else if (action.id === SHEETS_WIDGET_ID && !state.ids.includes(SHEETS_WIDGET_ID)) {
+        return {
+          ...state,
+          ids: [...state.ids, SHEETS_WIDGET_ID],
+          showAddWidgetModal: false,
+          grid: {
+            ...state.grid,
+            layout: [
+              ...state.grid.layout,
+              { i: SHEETS_WIDGET_ID, x: 0, y: 8, w: 6, h: 6, static: false },
+            ],
+          },
+          metadata: {
+            ...state.metadata,
+            [action.id]: {
+              type: SHEETS_WIDGET,
               standardWidth: 6,
               standardHeight: 6,
               minWidth: 4,
@@ -252,6 +281,7 @@ export const widgets = (state = initialState, action) => {
           [TRANSIT_WIDGET_ID]: transitReducer(state.byId[TRANSIT_WIDGET_ID], action),
           [GITHUB_WIDGET_ID]: githubReducer(state.byId[GITHUB_WIDGET_ID], action),
           [SLACK_WIDGET_ID]: slackReducer(state.byId[SLACK_WIDGET_ID], action),
+          [SHEETS_WIDGET_ID]: sheetsReducer(state.byId[SHEETS_WIDGET_ID], action),
         },
         showSidebar: state.ids.length === 0,
       };
