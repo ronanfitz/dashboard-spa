@@ -6,6 +6,7 @@ export const GITHUB_WIDGET_ID = 'github';
 export const TRANSIT_WIDGET = 'transit';
 export const SLACK_WIDGET = 'slack';
 export const GITHUB_WIDGET = 'github';
+export const SHEET_WIDGET = 'sheet';
 // reducers
 export const ADD_WIDGET = 'ADD_WIDGET';
 export const REMOVE_WIDGET = 'REMOVE_WIDGET';
