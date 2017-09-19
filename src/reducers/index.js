@@ -105,7 +105,7 @@ export const calculateInitialPosition = (layout, width, height, maxCols = 12) =>
     return null;
   }
   for (let x = 0; x < 1000; x += 1) { // hardcoded upper limit to avoid unlikely infinite loop
-    for (let y = 0; y <= maxCols - width; y += 1) {
+    for (let y = 0; y < maxCols - width; y += 1) {
       if (isValidLocation(layout, x, y, width, height, maxCols)) {
         return { x, y };
       }
@@ -130,11 +130,13 @@ export const getWidgetConfigByType = (type) => {
 
 
 export const widgets = (state = initialState, action) => {
+  console.log('**LAYOUT BEFORE**\n', state.grid.layout);
+  console.log('**LAYOUT AFTER**\n',action.layout);
   switch (action.type) {
     case ADD_WIDGET: {
       const newLoc = calculateInitialPosition(state.grid.layout, 6, 8);
       const widgetConfig = getWidgetConfigByType(action.id);
-
+      console.log('New Loc: ', newLoc);
       return {
         ...state,
         ids: [...state.ids, widgetConfig.type],
