@@ -18,17 +18,17 @@ export const AddWidgetModal = props => (
     <Modal.Actions>
       {
         widgetConfigs.map(cfg => (
-            <Button
-              basic
-              color="blue"
-              onClick={() => props.addWidget(cfg.type)}
-              inverted
-              disabled={props.ids.includes(cfg.type)}
-              key={cfg.type}
-            >
-              <Icon name={cfg.icon} size="large" />{cfg.type}
-            </Button>
-          )
+          <Button
+            basic
+            color="blue"
+            onClick={() => props.addWidget(cfg.type)}
+            inverted
+            disabled={props.ids.includes(cfg.type)}
+            key={cfg.type}
+          >
+            <Icon name={cfg.icon} size="large" />{cfg.type}
+          </Button>
+        ),
         )
       }
       <Button
