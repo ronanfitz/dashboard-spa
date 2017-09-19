@@ -7,6 +7,7 @@ import {
   TRANSIT_WIDGET_ID,
   SLACK_WIDGET_ID,
   GITHUB_WIDGET_ID,
+  SHEETS_WIDGET_ID,
 } from '../../constants';
 import {
   addWidget,
@@ -28,6 +29,15 @@ export const AddWidgetModal = props => (
         disabled={props.ids.includes(TRANSIT_WIDGET_ID)}
       >
         <Icon name="rocket" size="large" />Transit
+      </Button>
+      <Button
+        basic
+        color="blue"
+        onClick={() => props.addWidget(SHEETS_WIDGET_ID)}
+        inverted
+        disabled={props.ids.includes(SHEETS_WIDGET_ID)}
+      >
+        <Icon name="table" size="large" />Sheets
       </Button>
       <Button
         basic
