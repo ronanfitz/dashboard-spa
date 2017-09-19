@@ -48,7 +48,6 @@ export const collapseWidgetSidebars = (metadata) => {
 };
 
 
-
 export const getWidgetConfigByType = (type) => {
   if (!type) {
     return undefined;
@@ -65,8 +64,6 @@ export const getWidgetConfigByType = (type) => {
 
 
 export const widgets = (state = initialState, action) => {
-  console.log('**LAYOUT BEFORE**\n', state.grid.layout);
-  console.log('**LAYOUT AFTER**\n',action.layout);
   switch (action.type) {
     case ADD_WIDGET: {
       const widgetConfig = getWidgetConfigByType(action.id);

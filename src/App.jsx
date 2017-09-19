@@ -72,7 +72,7 @@ export const AppComponent = (props) => {
                 verticalCompact={false}
                 className="layout"
                 layout={props.layout}
-                margin={[2,2]}
+                margin={[2, 2]}
                 cols={12}
                 rowHeight={30}
                 width={1200}

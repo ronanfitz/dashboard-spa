@@ -8,7 +8,7 @@ import {
   hideAddWidgetModal,
 } from '../../actions';
 import widgetConfigs from '../../configurations';
-
+/* eslint-disable react/no-unused-prop-types */
 export const AddWidgetModal = props => (
   <Modal basic size="small" open={props.showAddWidgetModal}>
     <Header icon="new pied piper" content="Choose a widget" />
