@@ -44,6 +44,21 @@ exports[`AddWidgetModal component should render a component with props as specif
     >
       <Icon
         as="i"
+        name="table"
+        size="large"
+      />
+      Sheets
+    </Button>
+    <Button
+      as="button"
+      basic={true}
+      color="blue"
+      disabled={false}
+      inverted={true}
+      onClick={[Function]}
+    >
+      <Icon
+        as="i"
         name="github"
         size="large"
       />
