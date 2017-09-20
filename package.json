@@ -4,8 +4,8 @@
   "private": true,
   "dependencies": {
     "@databraid/github-widget": "^1.0.21",
-    "@databraid/sheets-widget": "^1.0.2",
-    "@databraid/slack-widget": "^1.0.21",
+    "@databraid/sheets-widget": "^1.0.4",
+    "@databraid/slack-widget": "^1.0.24",
     "@databraid/transit-widget": "^1.0.26",
     "localforage": "^1.5.0",
     "prop-types": "15.5.10",
