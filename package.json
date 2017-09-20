@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@databraid/github-widget": "^1.0.18",
-    "@databraid/sheets-widget": "^1.0.0",
+    "@databraid/github-widget": "^1.0.21",
+    "@databraid/sheets-widget": "^1.0.2",
     "@databraid/slack-widget": "^1.0.21",
     "@databraid/transit-widget": "^1.0.26",
     "localforage": "^1.5.0",
