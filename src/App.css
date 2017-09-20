@@ -98,7 +98,7 @@
 body {
   background: white;
   margin: 0 !important;
-  padding: 0 !important;
+  padding: 3px !important;
 }
 
 #content {
@@ -152,7 +152,11 @@ body {
 }
 
 .grid-container>.ui.segment.pushable {
-    background-color: #eee;
+  background-color: #eee;
+}
+
+.pusher>.ui.segment.basic {
+  padding: 0px;
 }
 
 li b {

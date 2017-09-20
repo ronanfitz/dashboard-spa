@@ -7,7 +7,7 @@
     "@databraid/sheets-widget": "^1.0.2",
     "@databraid/slack-widget": "^1.0.21",
     "@databraid/transit-widget": "^1.0.26",
-    "localforage": "^1.5.0",
+    "localforage": "1.5.0",
     "prop-types": "15.5.10",
     "react": "15.6.1",
     "react-dom": "15.6.1",
