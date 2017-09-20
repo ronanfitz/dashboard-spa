@@ -27,8 +27,6 @@ import {
   SAVE_LAYOUT_CHANGE,
 } from '../constants';
 
-console.log('sheetsReducer', sheetsReducer);
-
 const initialState = {
   ids: [],
   byId: {},

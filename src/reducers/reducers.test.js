@@ -1,12 +1,14 @@
 import { Reducer } from 'redux-testkit';
 import { transit as transitReducer } from '@databraid/transit-widget/lib/reducers';
 import { github as githubReducer } from '@databraid/github-widget/lib/reducers';
+import { sheets as sheetsReducer } from '@databraid/sheets-widget/lib/reducers';
 import { storeReducer as slackReducer } from '@databraid/slack-widget/lib/Reducers';
 import { widgets as rootReducer, collapseWidgetSidebars } from './index';
 import {
   TRANSIT_WIDGET_ID,
   SLACK_WIDGET_ID,
   GITHUB_WIDGET_ID,
+  SHEETS_WIDGET_ID,
 } from '../constants';
 
 const initialState = {
@@ -107,6 +109,7 @@ describe('rootReducer', () => {
           [TRANSIT_WIDGET_ID]: transitReducer(undefined, {}),
           [GITHUB_WIDGET_ID]: githubReducer(undefined, {}),
           [SLACK_WIDGET_ID]: slackReducer(undefined, {}),
+          [SHEETS_WIDGET_ID]: sheetsReducer(undefined, {}),
         },
       });
   });
@@ -121,6 +124,7 @@ describe('rootReducer', () => {
           [TRANSIT_WIDGET_ID]: transitReducer(undefined, {}),
           [GITHUB_WIDGET_ID]: githubReducer(undefined, {}),
           [SLACK_WIDGET_ID]: slackReducer(undefined, {}),
+          [SHEETS_WIDGET_ID]: sheetsReducer(undefined, {}),
         },
       });
   });
@@ -407,4 +411,3 @@ describe('non-reducer functions', () => {
     })).toEqual(stateWithTransit.metadata);
   });
 });
-
