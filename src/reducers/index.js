@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { sheets as sheetsReducer } from '@databraid/sheets-widget/lib/reducers';
 import { transit as transitReducer } from '@databraid/transit-widget/lib/reducers';
 import { github as githubReducer } from '@databraid/github-widget/lib/reducers';
 import { storeReducer as slackReducer } from '@databraid/slack-widget/lib/Reducers';
@@ -20,6 +21,8 @@ import {
   UNLOCK_DASHBOARD,
   SAVE_LAYOUT_CHANGE,
 } from '../constants';
+
+console.log('sheetsReducer', sheetsReducer);
 
 const initialState = {
   ids: [],
@@ -218,6 +221,7 @@ export const widgets = (state = initialState, action) => {
           [TRANSIT_WIDGET_ID]: transitReducer(state.byId[TRANSIT_WIDGET_ID], action),
           [GITHUB_WIDGET_ID]: githubReducer(state.byId[GITHUB_WIDGET_ID], action),
           [SLACK_WIDGET_ID]: slackReducer(state.byId[SLACK_WIDGET_ID], action),
+          [SHEETS_WIDGET_ID]: sheetsReducer(state.byId[SHEETS_WIDGET_ID], action),
         },
         showSidebar: state.ids.length === 0,
       };
