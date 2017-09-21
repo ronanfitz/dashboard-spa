@@ -9,6 +9,7 @@ import {
   TRANSIT_WIDGET_ID,
   SLACK_WIDGET_ID,
   GITHUB_WIDGET_ID,
+  SHEETS_WIDGET_ID,
   ADD_WIDGET,
   REMOVE_WIDGET,
   SHOW_ADD_WIDGET_MODAL,
@@ -68,6 +69,37 @@ export const widgets = (state = initialState, action) => {
   switch (action.type) {
     case ADD_WIDGET: {
       const widgetConfig = getWidgetConfigByType(action.id);
+      console.log(state);
+      if (state.ids.length) {
+        return {
+          ...state,
+          ids: [...state.ids, widgetConfig.type],
+          showAddWidgetModal: false,
+          grid: {
+            ...state.grid,
+            layout: [
+              ...state.grid.layout,
+              {
+                i: widgetConfig.type,
+                x: state.grid.layout[0].w,
+                y: 0,
+                w: widgetConfig.initWidth,
+                h: widgetConfig.initHeight,
+                minW: widgetConfig.minWidth,
+                minH: widgetConfig.minHeight,
+                static: false,
+              },
+            ],
+          },
+          metadata: {
+            ...state.metadata,
+            [action.id]: {
+              type: widgetConfig.type,
+              showSidebar: false,
+            },
+          },
+        };
+      }
       return {
         ...state,
         ids: [...state.ids, widgetConfig.type],
