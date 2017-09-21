@@ -110,7 +110,7 @@ export const calculateInitialPosition = (layout, width, height, maxCols = 12) =>
   for (let x = 0; x < 1000; x += 1) { // hardcoded upper limit to avoid unlikely infinite loop
     for (let y = 0; y <= maxCols - width; y += 1) {
       if (isValidLocation(layout, x, y, width, height, maxCols)) {
-        return { x, y };
+        return { x: y, y: x };
       }
     }
   }

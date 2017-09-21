@@ -518,11 +518,10 @@ describe('non-reducer functions', () => {
       expect(calculateInitialPosition([], 13, 1, 12)).toEqual(null);
     });
     it('should return valid coordinates for 2x2', () => {
-      expect(calculateInitialPosition(layoutWithThree, 2, 2)).toEqual({ x: 0, y: 6 });
+      expect(calculateInitialPosition(layoutWithThree, 2, 2)).toEqual({ x: 6, y: 0 });
     });
     it('should return valid coordinates for 3x3', () => {
-      expect(calculateInitialPosition(layoutWithThree, 3, 3)).toEqual({ x: 4, y: 0 });
+      expect(calculateInitialPosition(layoutWithThree, 3, 3)).toEqual({ x: 0, y: 4 });
     });
   });
 });
-
