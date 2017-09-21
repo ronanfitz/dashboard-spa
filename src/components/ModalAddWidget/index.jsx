@@ -58,9 +58,9 @@ export const AddWidgetModal = props => (
         <Icon name="slack" size="large" /> Slack
       </Button>
       <Button
-        basic
         color="red"
         onClick={props.hideAddWidgetModal}
+        inverted
       >
         <Icon name="cancel" size="large" /> Cancel
       </Button>
