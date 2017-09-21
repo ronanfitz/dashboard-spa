@@ -51,51 +51,51 @@ export const collapseWidgetSidebars = (metadata) => {
 };
 
 
-const isYOverlap = (newY, newW, widgetY, widgetW) => {
-  const y1 = (
-    widgetY >= newY &&
-    widgetY <= (newY + newW) - 1
+const isXOverlap = (newX, newW, widgetX, widgetW) => {
+  const x1 = (
+    widgetX >= newX &&
+    widgetX <= (newX + newW) - 1
   );
-  const y2 = (
-    (widgetY + widgetW) - 1 >= newY &&
-    (widgetY + widgetW) - 1 <= (newY + newW) - 1
+  const x2 = (
+    (widgetX + widgetW) - 1 >= newX &&
+    (widgetX + widgetW) - 1 <= (newX + newW) - 1
   );
-  const y3 = (
-    newY >= widgetY &&
-    newY <= (widgetY + widgetW) - 1
+  const x3 = (
+    newX >= widgetX &&
+    newX <= (widgetX + widgetW) - 1
   );
-  const y4 = (
-    (newY + newW) - 1 >= widgetY &&
-    (newY + newW) - 1 <= (widgetY + widgetW) - 1
+  const x4 = (
+    (newX + newW) - 1 >= widgetX &&
+    (newX + newW) - 1 <= (widgetX + widgetW) - 1
   );
 
-  return y1 || y2 || y3 || y4;
+  return x1 || x2 || x3 || x4;
 };
 
 export const isValidLocation = (layout, x, y, w, h) => {
   for (let i = 0; i < layout.length; i += 1) {
-    const x1 = (
-      layout[i].x >= x &&
-      layout[i].x <= (x + h) - 1 &&
-      isYOverlap(y, w, layout[i].y, layout[i].w)
+    const y1 = (
+      layout[i].y >= y &&
+      layout[i].y <= (y + h) - 1 &&
+      isXOverlap(x, w, layout[i].x, layout[i].w)
     );
-    const x2 = (
-      (layout[i].x + layout[i].h) - 1 >= x &&
-      (layout[i].x + layout[i].h) - 1 <= (x + h) - 1 &&
-      isYOverlap(y, w, layout[i].y, layout[i].w)
+    const y2 = (
+      (layout[i].y + layout[i].h) - 1 >= y &&
+      (layout[i].y + layout[i].h) - 1 <= (y + h) - 1 &&
+      isXOverlap(x, w, layout[i].x, layout[i].w)
     );
-    const x3 = (
-      x >= layout[i].x &&
-      x <= (layout[i].x + layout[i].h) - 1 &&
-      isYOverlap(y, w, layout[i].y, layout[i].w)
+    const y3 = (
+      y >= layout[i].y &&
+      y <= (layout[i].y + layout[i].h) - 1 &&
+      isXOverlap(x, w, layout[i].x, layout[i].w)
     );
-    const x4 = (
-      (x + h) - 1 >= layout[i].x &&
-      (x + h) - 1 <= (layout[i].x + layout[i].h) - 1 &&
-      isYOverlap(y, w, layout[i].y, layout[i].w)
+    const y4 = (
+      (y + h) - 1 >= layout[i].y &&
+      (y + h) - 1 <= (layout[i].y + layout[i].h) - 1 &&
+      isXOverlap(x, w, layout[i].x, layout[i].w)
     );
 
-    if (x1 || x2 || x3 || x4) {
+    if (y1 || y2 || y3 || y4) {
       return false;
     }
   }
@@ -107,10 +107,10 @@ export const calculateInitialPosition = (layout, width, height, maxCols = 12) =>
   if (width > maxCols) {
     return null;
   }
-  for (let x = 0; x < 1000; x += 1) { // hardcoded upper limit to avoid unlikely infinite loop
-    for (let y = 0; y <= maxCols - width; y += 1) {
+  for (let y = 0; y < 1000; y += 1) { // hardcoded upper limit to avoid unlikely infinite loop
+    for (let x = 0; x <= maxCols - width; x += 1) {
       if (isValidLocation(layout, x, y, width, height, maxCols)) {
-        return { x: y, y: x };
+        return { x, y };
       }
     }
   }
